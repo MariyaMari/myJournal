@@ -7,7 +7,7 @@ MainForm::MainForm(QWidget *parent) :
 {
     m_ui.setupUi(this);
 
-    spisokSpravochniki = new Spravochniki( /*m_settings*/ );
+    spisokSpravochniki = new Spravochniki( m_settings );
     connect(m_ui.pushButton, SIGNAL(clicked()), spisokSpravochniki, SLOT(show()));
 
     spisokWorkTables = new WorkTables();
