@@ -3,9 +3,10 @@
 
 #include <QMessageBox>
 
-Spravochniki::Spravochniki(QWidget *parent) :
+Spravochniki::Spravochniki( const SettingsPtr & settings, QWidget * parent ) :
     QWidget(parent),
-    ui(new Ui::Spravochniki)
+    ui(new Ui::Spravochniki),
+    m_settings( settings )
 {
     ui->setupUi(this);
 
@@ -35,6 +36,12 @@ Spravochniki::~Spravochniki()
 
 void Spravochniki::on_pushButton_clicked()
 {
+    //Setting use
+    int setting1 = m_settings->getSetting1();
+
+    //Setting set
+    m_settings->setSetting1( 1 );
+
     QSqlTableModel *mod = new QSqlTableModel(0, db);
     mod->setEditStrategy(QSqlTableModel::OnManualSubmit);
     mod->setTable("disciplina");

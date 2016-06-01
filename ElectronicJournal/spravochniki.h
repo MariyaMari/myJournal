@@ -10,6 +10,7 @@
 #include <formfaculty.h>
 #include <formstudents.h>
 #include <formgroup.h>
+#include "settings.hpp"
 
 namespace Ui {
 class Spravochniki;
@@ -20,7 +21,7 @@ class Spravochniki : public QWidget
     Q_OBJECT
 
 public:
-    explicit Spravochniki(QWidget *parent = 0);
+    explicit Spravochniki( const SettingsPtr & settings, QWidget * parent = 0 );
     ~Spravochniki();
 
     QSqlDatabase db;
@@ -47,6 +48,8 @@ private:
     FormFaculty *faculty;
     FormStudents *students;
     FormGroup *group;
+
+    SettingsPtr     m_settings;
 
 };
 
