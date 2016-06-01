@@ -3,12 +3,10 @@
 
 #include <QMainWindow>
 #include <QtSql>
-#include <spravochniki.h>
-#include <worktables.h>
-
-namespace Ui {
-class MainForm;
-}
+#include "spravochniki.h"
+#include "worktables.h"
+#include "settings.hpp"
+#include "ui_mainform.h"
 
 class MainForm : public QMainWindow
 {
@@ -28,10 +26,11 @@ private slots:
     void on_pushButton_2_clicked();
 
 private:
-    Ui::MainForm *ui;
+    Ui::MainForm		m_ui;
 
     Spravochniki *spisokSpravochniki;
     WorkTables *spisokWorkTables;
+    SettingsPtr     m_settings;
 
 };
 

@@ -260,6 +260,7 @@
     <ClCompile Include="Release\moc_worktables.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="settings.cpp" />
     <ClCompile Include="spravochniki.cpp" />
     <ClCompile Include="tablecompositiongroup.cpp" />
     <ClCompile Include="tablelistworks.cpp" />
@@ -696,6 +697,7 @@
     <ClInclude Include="GeneratedFiles\ui_toplan.h" />
     <ClInclude Include="GeneratedFiles\ui_tovisit.h" />
     <ClInclude Include="GeneratedFiles\ui_worktables.h" />
+    <ClInclude Include="settings.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

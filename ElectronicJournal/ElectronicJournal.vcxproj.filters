@@ -221,6 +221,9 @@
     <ClCompile Include="Release\moc_worktables.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="settings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="formdiscipline.h">
@@ -397,6 +400,9 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_worktables.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="settings.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

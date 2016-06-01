@@ -3,24 +3,21 @@
 
 MainForm::MainForm(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainForm)
+    m_settings( new Settings() )
 {
-    ui->setupUi(this);
+    m_ui.setupUi(this);
 
-    spisokSpravochniki = new Spravochniki();
-    connect(ui->pushButton, SIGNAL(clicked()), spisokSpravochniki, SLOT(show()));
+    spisokSpravochniki = new Spravochniki( /*m_settings*/ );
+    connect(m_ui.pushButton, SIGNAL(clicked()), spisokSpravochniki, SLOT(show()));
 
     spisokWorkTables = new WorkTables();
-    connect(ui->pushButton_2, SIGNAL(clicked()), spisokWorkTables, SLOT(show()));
+    connect(m_ui.pushButton_2, SIGNAL(clicked()), spisokWorkTables, SLOT(show()));
 
     ConnectToDataBase();
 
 }
 
-MainForm::~MainForm()
-{
-    delete ui;
-}
+MainForm::~MainForm() {}
 
 void MainForm::ConnectToDataBase()
 {
