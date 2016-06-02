@@ -1,9 +1,10 @@
 #include "tablevisit.h"
 #include "ui_tablevisit.h"
 
-TableVisit::TableVisit(QWidget *parent) :
+TableVisit::TableVisit(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::TableVisit)
+    ui(new Ui::TableVisit),
+    m_settings(settings)
 {
     ui->setupUi(this);
 }

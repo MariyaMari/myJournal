@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QtSql>
+#include "settings.h"
 
 namespace Ui {
 class TablePlan;
@@ -13,7 +14,7 @@ class TablePlan : public QWidget
     Q_OBJECT
 
 public:
-    explicit TablePlan(QWidget *parent = 0);
+    explicit TablePlan(const SettingsPtr & settings, QWidget *parent = 0);
     ~TablePlan();
 
     QSqlDatabase db;
@@ -23,6 +24,8 @@ public:
 
 private:
     Ui::TablePlan *ui;
+
+    SettingsPtr m_settings;
 };
 
 #endif // TABLEPLAN_H

@@ -3,25 +3,26 @@
 
 #include <QMessageBox>
 
-WorkTables::WorkTables(QWidget *parent) :
+WorkTables::WorkTables(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::WorkTables)
+    ui(new Ui::WorkTables),
+    m_settings(settings)
 {
     ui->setupUi(this);
 
-    toPlan = new ToPlan();
+    toPlan = new ToPlan(settings);
     connect(ui->pushButton, SIGNAL(clicked()), toPlan, SLOT(show()));
 
-    toCompGroup = new ToCompositionGroup();
+    toCompGroup = new ToCompositionGroup(settings);
     connect(ui->pushButton_2, SIGNAL(clicked()), toCompGroup, SLOT(show()));
 
-    toVisit = new ToVisit();
+    toVisit = new ToVisit(settings);
     connect(ui->pushButton_3, SIGNAL(clicked()), toVisit, SLOT(show()));
 
-    tolistWorks = new ToListWorks();
+    tolistWorks = new ToListWorks(settings);
     connect(ui->pushButton_4, SIGNAL(clicked()), tolistWorks, SLOT(show()));
 
-    toMadeWorks = new ToMadeWorks();
+    toMadeWorks = new ToMadeWorks(settings);
     connect(ui->pushButton_5, SIGNAL(clicked()), toMadeWorks, SLOT(show()));
 }
 

@@ -3,9 +3,10 @@
 
 #include <QMessageBox>
 
-FormSpecialty::FormSpecialty(QWidget *parent) :
+FormSpecialty::FormSpecialty(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::FormSpecialty)
+    ui(new Ui::FormSpecialty),
+    m_settings(settings)
 {
     ui->setupUi(this);
 }

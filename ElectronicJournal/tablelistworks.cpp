@@ -1,9 +1,10 @@
 #include "tablelistworks.h"
 #include "ui_tablelistworks.h"
 
-TableListWorks::TableListWorks(QWidget *parent) :
+TableListWorks::TableListWorks(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::TableListWorks)
+    ui(new Ui::TableListWorks),
+    m_settings(settings)
 {
     ui->setupUi(this);
 }

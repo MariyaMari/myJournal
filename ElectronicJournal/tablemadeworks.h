@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QtSql>
+#include "settings.h"
 
 namespace Ui {
 class TableMadeWorks;
@@ -13,7 +14,7 @@ class TableMadeWorks : public QWidget
     Q_OBJECT
 
 public:
-    explicit TableMadeWorks(QWidget *parent = 0);
+    explicit TableMadeWorks(const SettingsPtr & settings, QWidget *parent = 0);
     ~TableMadeWorks();
 
     QSqlDatabase db;
@@ -23,6 +24,8 @@ public:
 
 private:
     Ui::TableMadeWorks *ui;
+
+    SettingsPtr m_settings;
 };
 
 #endif // TABLEMADEWORKS_H

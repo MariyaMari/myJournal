@@ -1,13 +1,14 @@
 #include "tovisit.h"
 #include "ui_tovisit.h"
 
-ToVisit::ToVisit(QWidget *parent) :
+ToVisit::ToVisit(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ToVisit)
+    ui(new Ui::ToVisit),
+    m_settings(settings)
 {
     ui->setupUi(this);
 
-    visit = new TableVisit();
+    visit = new TableVisit(settings);
     connect(ui->pushButton, SIGNAL(clicked()), visit, SLOT(show()));
 }
 

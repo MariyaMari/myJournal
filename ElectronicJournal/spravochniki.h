@@ -10,7 +10,7 @@
 #include <formfaculty.h>
 #include <formstudents.h>
 #include <formgroup.h>
-#include "settings.hpp"
+#include "settings.h"
 
 namespace Ui {
 class Spravochniki;
@@ -49,7 +49,7 @@ private:
     FormStudents *students;
     FormGroup *group;
 
-    SettingsPtr     m_settings;
+    SettingsPtr m_settings;
 
 };
 

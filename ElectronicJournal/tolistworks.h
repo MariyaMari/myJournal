@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QtSql>
 #include <tablelistworks.h>
+#include "settings.h"
 
 namespace Ui {
 class ToListWorks;
@@ -14,7 +15,7 @@ class ToListWorks : public QWidget
     Q_OBJECT
 
 public:
-    explicit ToListWorks(QWidget *parent = 0);
+    explicit ToListWorks(const SettingsPtr & settings, QWidget *parent = 0);
     ~ToListWorks();
 
     QSqlDatabase db;
@@ -30,6 +31,8 @@ private:
     Ui::ToListWorks *ui;
 
     TableListWorks *listWorks;
+
+    SettingsPtr m_settings;
 };
 
 #endif // TOLISTWORKS_H

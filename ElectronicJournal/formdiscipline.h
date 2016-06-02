@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QtSql>
+#include "settings.h"
 
 namespace Ui {
 class FormDiscipline;
@@ -13,7 +14,7 @@ class FormDiscipline : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormDiscipline(QWidget *parent = 0);
+    explicit FormDiscipline(const SettingsPtr & settings, QWidget *parent = 0);
     ~FormDiscipline();
 
     QSqlDatabase db;
@@ -36,6 +37,8 @@ private slots:
 
 private:
     Ui::FormDiscipline *ui;
+
+    SettingsPtr m_settings;
 };
 
 #endif // FORMDISCIPLINE_H

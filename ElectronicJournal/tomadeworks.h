@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QtSql>
 #include <tablemadeworks.h>
+#include "settings.h"
 
 namespace Ui {
 class ToMadeWorks;
@@ -14,7 +15,7 @@ class ToMadeWorks : public QWidget
     Q_OBJECT
 
 public:
-    explicit ToMadeWorks(QWidget *parent = 0);
+    explicit ToMadeWorks(const SettingsPtr & settings, QWidget *parent = 0);
     ~ToMadeWorks();
 
     QSqlDatabase db;
@@ -30,6 +31,8 @@ private:
     Ui::ToMadeWorks *ui;
 
     TableMadeWorks *madeWorks;
+
+    SettingsPtr m_settings;
 };
 
 #endif // TOMADEWORKS_H

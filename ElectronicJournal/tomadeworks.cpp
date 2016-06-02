@@ -1,13 +1,14 @@
 #include "tomadeworks.h"
 #include "ui_tomadeworks.h"
 
-ToMadeWorks::ToMadeWorks(QWidget *parent) :
+ToMadeWorks::ToMadeWorks(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ToMadeWorks)
+    ui(new Ui::ToMadeWorks),
+    m_settings(settings)
 {
     ui->setupUi(this);
 
-    madeWorks = new TableMadeWorks();
+    madeWorks = new TableMadeWorks(settings);
     connect(ui->pushButton, SIGNAL(clicked()), madeWorks, SLOT(show()));
 }
 

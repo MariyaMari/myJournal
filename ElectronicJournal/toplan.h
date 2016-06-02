@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QtSql>
 #include <tableplan.h>
+#include "settings.h"
 
 namespace Ui {
 class ToPlan;
@@ -14,7 +15,7 @@ class ToPlan : public QWidget
     Q_OBJECT
 
 public:
-    explicit ToPlan(QWidget *parent = 0);
+    explicit ToPlan(const SettingsPtr & settings, QWidget *parent = 0);
     ~ToPlan();
 
     QSqlDatabase db;
@@ -31,6 +32,8 @@ private:
     Ui::ToPlan *ui;
 
     TablePlan *plan;
+
+    SettingsPtr m_settings;
 };
 
 #endif // TOPLAN_H

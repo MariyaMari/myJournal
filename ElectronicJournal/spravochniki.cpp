@@ -10,22 +10,22 @@ Spravochniki::Spravochniki( const SettingsPtr & settings, QWidget * parent ) :
 {
     ui->setupUi(this);
 
-    discipline = new FormDiscipline();
+    discipline = new FormDiscipline(m_settings);
     connect(ui->pushButton, SIGNAL(clicked()), discipline, SLOT(show()));
 
-    specialty = new FormSpecialty();
+    specialty = new FormSpecialty(m_settings);
     connect(ui->pushButton_2, SIGNAL(clicked()), specialty, SLOT(show()));
 
-    typeWorks = new FormTypeWorks();
+    typeWorks = new FormTypeWorks(m_settings);
     connect(ui->pushButton_3, SIGNAL(clicked()), typeWorks, SLOT(show()));
 
-    faculty = new FormFaculty();
+    faculty = new FormFaculty(m_settings);
     connect(ui->pushButton_4, SIGNAL(clicked()), faculty, SLOT(show()));
 
-    students = new FormStudents();
+    students = new FormStudents(m_settings);
     connect(ui->pushButton_5, SIGNAL(clicked()), students, SLOT(show()));
 
-    group = new FormGroup();
+    group = new FormGroup(m_settings);
     connect(ui->pushButton_6, SIGNAL(clicked()), group, SLOT(show()));
 }
 

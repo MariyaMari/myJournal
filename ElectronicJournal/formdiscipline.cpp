@@ -3,9 +3,10 @@
 
 #include <QMessageBox>
 
-FormDiscipline::FormDiscipline(QWidget *parent) :
+FormDiscipline::FormDiscipline(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::FormDiscipline)
+    ui(new Ui::FormDiscipline),
+    m_settings(settings)
 {
     ui->setupUi(this);
 

@@ -1,9 +1,10 @@
 #include "tablecompositiongroup.h"
 #include "ui_tablecompositiongroup.h"
 
-TableCompositionGroup::TableCompositionGroup(QWidget *parent) :
+TableCompositionGroup::TableCompositionGroup(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::TableCompositionGroup)
+    ui(new Ui::TableCompositionGroup),
+    m_settings(settings)
 {
     ui->setupUi(this);
 }

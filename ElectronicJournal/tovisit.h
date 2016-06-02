@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QtSql>
 #include <tablevisit.h>
+#include "settings.h"
 
 namespace Ui {
 class ToVisit;
@@ -15,7 +16,7 @@ class ToVisit : public QWidget
     Q_OBJECT
 
 public:
-    explicit ToVisit(QWidget *parent = 0);
+    explicit ToVisit(const SettingsPtr & settings, QWidget *parent = 0);
     ~ToVisit();
 
     QSqlDatabase db;
@@ -31,6 +32,8 @@ private:
     Ui::ToVisit *ui;
 
     TableVisit *visit;
+
+    SettingsPtr m_settings;
 };
 
 #endif // TOVISIT_H

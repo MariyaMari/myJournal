@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QtSql>
+#include "settings.h"
 
 namespace Ui {
 class FormTypeWorks;
@@ -13,7 +14,7 @@ class FormTypeWorks : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormTypeWorks(QWidget *parent = 0);
+    explicit FormTypeWorks(const SettingsPtr & settings, QWidget *parent = 0);
     ~FormTypeWorks();
 
     QSqlDatabase db;
@@ -30,6 +31,8 @@ private slots:
 
 private:
     Ui::FormTypeWorks *ui;
+
+    SettingsPtr m_settings;
 };
 
 #endif // FORMTYPEWORKS_H

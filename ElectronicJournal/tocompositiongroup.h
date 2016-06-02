@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QtSql>
 #include <tablecompositiongroup.h>
+#include "settings.h"
 
 namespace Ui {
 class ToCompositionGroup;
@@ -14,7 +15,7 @@ class ToCompositionGroup : public QWidget
     Q_OBJECT
 
 public:
-    explicit ToCompositionGroup(QWidget *parent = 0);
+    explicit ToCompositionGroup(const SettingsPtr & settings, QWidget *parent = 0);
     ~ToCompositionGroup();
 
     QSqlDatabase db;
@@ -30,6 +31,8 @@ private:
     Ui::ToCompositionGroup *ui;
 
     TableCompositionGroup *compGrup;
+
+    SettingsPtr m_settings;
 };
 
 #endif // TOCOMPOSITIONGROUP_H

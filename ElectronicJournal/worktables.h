@@ -8,6 +8,7 @@
 #include <tovisit.h>
 #include <tolistworks.h>
 #include <tomadeworks.h>
+#include "settings.h"
 
 namespace Ui {
 class WorkTables;
@@ -18,7 +19,7 @@ class WorkTables : public QWidget
     Q_OBJECT
 
 public:
-    explicit WorkTables(QWidget *parent = 0);
+    explicit WorkTables(const SettingsPtr & settings, QWidget *parent = 0);
     ~WorkTables();
 
     QSqlDatabase db;
@@ -43,6 +44,8 @@ private:
     ToVisit *toVisit;
     ToListWorks *tolistWorks;
     ToMadeWorks *toMadeWorks;
+
+    SettingsPtr m_settings;
 };
 
 #endif // WORKTABLES_H

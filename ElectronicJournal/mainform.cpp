@@ -10,7 +10,7 @@ MainForm::MainForm(QWidget *parent) :
     spisokSpravochniki = new Spravochniki( m_settings );
     connect(m_ui.pushButton, SIGNAL(clicked()), spisokSpravochniki, SLOT(show()));
 
-    spisokWorkTables = new WorkTables();
+    spisokWorkTables = new WorkTables(m_settings);
     connect(m_ui.pushButton_2, SIGNAL(clicked()), spisokWorkTables, SLOT(show()));
 
     ConnectToDataBase();

@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QtSql>
+#include "settings.h"
 
 namespace Ui {
 class TableCompositionGroup;
@@ -13,7 +14,7 @@ class TableCompositionGroup : public QWidget
     Q_OBJECT
 
 public:
-    explicit TableCompositionGroup(QWidget *parent = 0);
+    explicit TableCompositionGroup(const SettingsPtr & settings, QWidget *parent = 0);
     ~TableCompositionGroup();
 
     QSqlDatabase db;
@@ -23,6 +24,8 @@ public:
 
 private:
     Ui::TableCompositionGroup *ui;
+
+    SettingsPtr m_settings;
 };
 
 #endif // TABLECOMPOSITIONGROUP_H

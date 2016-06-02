@@ -1,9 +1,10 @@
 #include "tableplan.h"
 #include "ui_tableplan.h"
 
-TablePlan::TablePlan(QWidget *parent) :
+TablePlan::TablePlan(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::TablePlan)
+    ui(new Ui::TablePlan),
+    m_settings(settings)
 {
     ui->setupUi(this);
 }

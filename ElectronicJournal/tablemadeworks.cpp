@@ -1,9 +1,10 @@
 #include "tablemadeworks.h"
 #include "ui_tablemadeworks.h"
 
-TableMadeWorks::TableMadeWorks(QWidget *parent) :
+TableMadeWorks::TableMadeWorks(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::TableMadeWorks)
+    ui(new Ui::TableMadeWorks),
+    m_settings(settings)
 {
     ui->setupUi(this);
 }

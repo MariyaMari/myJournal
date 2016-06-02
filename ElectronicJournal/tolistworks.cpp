@@ -1,13 +1,14 @@
 #include "tolistworks.h"
 #include "ui_tolistworks.h"
 
-ToListWorks::ToListWorks(QWidget *parent) :
+ToListWorks::ToListWorks(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ToListWorks)
+    ui(new Ui::ToListWorks),
+    m_settings(settings)
 {
     ui->setupUi(this);
 
-    listWorks = new TableListWorks();
+    listWorks = new TableListWorks(settings);
     connect(ui->pushButton, SIGNAL(clicked()), listWorks, SLOT(show()));
 }
 

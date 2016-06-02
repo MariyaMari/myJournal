@@ -1,13 +1,14 @@
 #include "toplan.h"
 #include "ui_toplan.h"
 
-ToPlan::ToPlan(QWidget *parent) :
+ToPlan::ToPlan(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ToPlan)
+    ui(new Ui::ToPlan),
+    m_settings(settings)
 {
     ui->setupUi(this);
 
-    plan = new TablePlan();
+    plan = new TablePlan(settings);
     connect(ui->pushButton, SIGNAL(clicked()), plan, SLOT(show()));
 }
 

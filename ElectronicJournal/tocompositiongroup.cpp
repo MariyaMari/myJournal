@@ -1,13 +1,14 @@
 #include "tocompositiongroup.h"
 #include "ui_tocompositiongroup.h"
 
-ToCompositionGroup::ToCompositionGroup(QWidget *parent) :
+ToCompositionGroup::ToCompositionGroup(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ToCompositionGroup)
+    ui(new Ui::ToCompositionGroup),
+    m_settings(settings)
 {
     ui->setupUi(this);
 
-    compGrup = new TableCompositionGroup();
+    compGrup = new TableCompositionGroup(settings);
     connect(ui->pushButton, SIGNAL(clicked()), compGrup, SLOT(show()));
 }
 
