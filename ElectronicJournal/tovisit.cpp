@@ -31,9 +31,10 @@ void ToVisit::Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2, QSqlQueryModel *m
 
 void ToVisit::on_pushButton_clicked()
 {
-    QSqlTableModel *mod = new QSqlTableModel(0, db);
-    mod->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    QSqlRelationalTableModel *mod = new QSqlRelationalTableModel(0, db);
+    mod->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
     mod->setTable("link3");
+//    mod->setRelation(0, QSqlRelation("students", "id_st", "fio"));
     mod->select();
     mod->setFilter("id_trab=(SELECT typerabot.id_trab FROM typerabot WHERE typerabot.n_trab='"
                    + ui->comboBox_3->currentText() + "') "

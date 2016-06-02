@@ -34,9 +34,10 @@ void ToMadeWorks::Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2, QSqlQueryMode
 
 void ToMadeWorks::on_pushButton_clicked()
 {
-    QSqlTableModel *mod = new QSqlTableModel(0, db);
-    mod->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    QSqlRelationalTableModel *mod = new QSqlRelationalTableModel(0, db);
+    mod->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
     mod->setTable("link2");
+//    mod->setRelation(0, QSqlRelation("students", "id_st", "fio"));
     mod->select();
 //    mod->setFilter("id_spec=(SELECT specialty.id_spec FROM specialty WHERE specialty.n_spec='"
 //                   + ui->comboBox_2->currentText() + "') "

@@ -14,7 +14,7 @@ TableMadeWorks::~TableMadeWorks()
     delete ui;
 }
 
-void TableMadeWorks::Init(QSqlTableModel *mod)
+void TableMadeWorks::Init(QSqlRelationalTableModel *mod)
 {
     this->model = mod;
     ui->tableView->setModel(model);

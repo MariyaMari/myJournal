@@ -34,8 +34,8 @@ void ToListWorks::Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2, QSqlQueryMode
 
 void ToListWorks::on_pushButton_clicked()
 {
-    QSqlTableModel *mod = new QSqlTableModel(0, db);
-    mod->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    QSqlRelationalTableModel *mod = new QSqlRelationalTableModel(0, db);
+    mod->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
     mod->setTable("link1");
     mod->select();
     mod->setFilter("id_trab=(SELECT typerabot.id_trab FROM typerabot WHERE typerabot.n_trab='"

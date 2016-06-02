@@ -20,7 +20,6 @@ public:
     ~ToVisit();
 
     QSqlDatabase db;
-    QSqlTableModel *model;
     QSqlQueryModel *modData, *modDis, *modVidWor;
 
     void Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2, QSqlQueryModel *mod3);

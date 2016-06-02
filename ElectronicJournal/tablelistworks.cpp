@@ -14,7 +14,7 @@ TableListWorks::~TableListWorks()
     delete ui;
 }
 
-void TableListWorks::Init(QSqlTableModel *mod)
+void TableListWorks::Init(QSqlRelationalTableModel *mod)
 {
     this->model = mod;
     ui->tableView->setModel(model);

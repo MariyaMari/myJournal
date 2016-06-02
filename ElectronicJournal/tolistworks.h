@@ -19,7 +19,6 @@ public:
     ~ToListWorks();
 
     QSqlDatabase db;
-    QSqlTableModel *model;
     QSqlQueryModel *modSemes, *modSpec, *modDis, *modVidWor;
 
     void Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2, QSqlQueryModel *mod3, QSqlQueryModel *mod4);

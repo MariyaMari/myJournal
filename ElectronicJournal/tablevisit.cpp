@@ -14,13 +14,13 @@ TableVisit::~TableVisit()
     delete ui;
 }
 
-void TableVisit::Init(QSqlTableModel *mod)
+void TableVisit::Init(QSqlRelationalTableModel *mod)
 {
     this->model = mod;
     ui->tableView->setModel(model);
 //    ui->tableView->setColumnHidden(1, true);
-//    ui->tableView->setColumnHidden(2, true);
-//    ui->tableView->setColumnHidden(4, true);
+    ui->tableView->setColumnHidden(2, true);
+    ui->tableView->setColumnHidden(4, true);
     ui->tableView->show();
     model->setHeaderData(0, Qt::Horizontal, "ФИО Студента");
     model->setHeaderData(3, Qt::Horizontal, "Пропуск");
