@@ -1,11 +1,11 @@
-#include "settings.hpp"
+#include "settings.h"
 
-Settings::Settings() : 
+Settings::Settings() :
     m_setting1( 0 /* Default value */ ) {}
 
 Settings::~Settings() {}
 
-int     Settings::getSetting1() const {
+int Settings::getSetting1() const {
     return m_setting1;
 }
 

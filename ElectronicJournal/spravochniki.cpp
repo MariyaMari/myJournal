@@ -53,9 +53,10 @@ void Spravochniki::on_pushButton_clicked()
 
 void Spravochniki::on_pushButton_2_clicked()
 {
-    QSqlTableModel *mod = new QSqlTableModel(0, db);
-    mod->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    QSqlRelationalTableModel *mod = new QSqlRelationalTableModel(0, db);
+    mod->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
     mod->setTable("specialty");
+    mod->setRelation(2, QSqlRelation("facultet", "id_fac", "n_fac"));
     mod->select();
 
     specialty->Init(mod);
@@ -97,9 +98,10 @@ void Spravochniki::on_pushButton_5_clicked()
 
 void Spravochniki::on_pushButton_6_clicked()
 {
-    QSqlTableModel *mod = new QSqlTableModel(0, db);
-    mod->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    QSqlRelationalTableModel *mod = new QSqlRelationalTableModel(0, db);
+    mod->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
     mod->setTable("gruppa");
+    mod->setRelation(3, QSqlRelation("specialty", "id_spec", "n_spec"));
     mod->select();
 
     group->Init(mod);

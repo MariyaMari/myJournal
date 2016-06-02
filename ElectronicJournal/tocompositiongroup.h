@@ -19,7 +19,6 @@ public:
     ~ToCompositionGroup();
 
     QSqlDatabase db;
-    QSqlTableModel *model;
     QSqlQueryModel *modSemes, *modGrup;
 
     void Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2);

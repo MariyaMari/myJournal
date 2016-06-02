@@ -1,6 +1,8 @@
 #include "tablelistworks.h"
 #include "ui_tablelistworks.h"
 
+#include <QMessageBox>
+
 TableListWorks::TableListWorks(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TableListWorks),
@@ -33,4 +35,21 @@ void TableListWorks::Init(QSqlRelationalTableModel *mod)
     int count = pHW->count();
     for (int i = 0; i < count; i++)
         pHW->setSectionResizeMode(i,QHeaderView::ResizeToContents);
+}
+
+void TableListWorks::on_pushButton_clicked() //Удалить
+{
+    model->removeRow(ui->tableView->currentIndex().row());
+}
+
+void TableListWorks::on_pushButton_2_clicked() //Добавить
+{
+
+}
+
+void TableListWorks::on_pushButton_3_clicked() //Подтвердить
+{
+    if(!model->submitAll())
+        QMessageBox::warning(this, "Error", model->lastError().text());
+    model->select();
 }

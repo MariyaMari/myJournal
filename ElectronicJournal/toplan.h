@@ -19,7 +19,6 @@ public:
     ~ToPlan();
 
     QSqlDatabase db;
-    QSqlTableModel *model;
     QSqlQueryModel *modSemes, *modSpec;
 
     void Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2);

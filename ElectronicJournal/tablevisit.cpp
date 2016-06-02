@@ -1,6 +1,8 @@
 #include "tablevisit.h"
 #include "ui_tablevisit.h"
 
+#include <QMessageBox>
+
 TableVisit::TableVisit(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TableVisit),
@@ -30,4 +32,21 @@ void TableVisit::Init(QSqlRelationalTableModel *mod)
     for (int i = 0; i < count; i++)
         pHW->setSectionResizeMode(i,QHeaderView::ResizeToContents);
 
+}
+
+void TableVisit::on_pushButton_clicked() //Удалить
+{
+    model->removeRow(ui->tableView->currentIndex().row());
+}
+
+void TableVisit::on_pushButton_2_clicked() //Добавить
+{
+
+}
+
+void TableVisit::on_pushButton_3_clicked() //Подтвердить
+{
+    if(!model->submitAll())
+        QMessageBox::warning(this, "Error", model->lastError().text());
+    model->select();
 }

@@ -23,7 +23,7 @@ void FormDiscipline::Init(QSqlTableModel *mod)
 {
     this->model = mod;
     ui->tableView->setModel(model);
-   // ui->tableView->setColumnHidden(0, true);
+    ui->tableView->setColumnHidden(0, true);
     ui->tableView->show();
     model->setHeaderData(1, Qt::Horizontal, "Название Дисциплины");
 
@@ -41,9 +41,7 @@ void FormDiscipline::on_pushButton_clicked() //Удалить
 
 void FormDiscipline::on_pushButton_2_clicked() //Добавить
 {
-    QSqlRecord newRec;// = model->record();
-   // newRec.field("id_dis").setGenerated(true);
-   // newRec.field("id_dis").setValue(10);
+    QSqlRecord newRec;
     model->insertRecord(-1, newRec);
 }
 
