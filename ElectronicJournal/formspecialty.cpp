@@ -16,14 +16,14 @@ FormSpecialty::~FormSpecialty()
     delete ui;
 }
 
-void FormSpecialty::Init(QSqlTableModel *mod)
+void FormSpecialty::Init(QSqlRelationalTableModel *mod)
 {
     this->model = mod;
     ui->tableView->setModel(model);
-    //ui->tableView->setColumnHidden(0, true);
-    //ui->tableView->setColumnHidden(2, true);
+    ui->tableView->setColumnHidden(0, true);
     ui->tableView->show();
     model->setHeaderData(1, Qt::Horizontal, "Название Специальности");
+    model->setHeaderData(2, Qt::Horizontal, "Факультет");
 
     QHeaderView *pHW = ui->tableView->horizontalHeader(); //Нрмальный размер колонок
     int count = pHW->count();

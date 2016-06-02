@@ -18,9 +18,9 @@ public:
     ~FormSpecialty();
 
     QSqlDatabase db;
-    QSqlTableModel *model;
+    QSqlRelationalTableModel *model;
 
-    void Init(QSqlTableModel *mod);
+    void Init(QSqlRelationalTableModel *mod);
 
 private slots:
     void on_pushButton_clicked();

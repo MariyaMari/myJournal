@@ -18,9 +18,9 @@ public:
     ~TableListWorks();
 
     QSqlDatabase db;
-    QSqlTableModel *model;
+    QSqlRelationalTableModel *model;
 
-    void Init(QSqlTableModel *mod);
+    void Init(QSqlRelationalTableModel *mod);
 
 private:
     Ui::TableListWorks *ui;

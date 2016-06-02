@@ -16,15 +16,15 @@ FormGroup::~FormGroup()
     delete ui;
 }
 
-void FormGroup::Init(QSqlTableModel *mod)
+void FormGroup::Init(QSqlRelationalTableModel *mod)
 {
     this->model = mod;
     ui->tableView->setModel(model);
-    //ui->tableView->setColumnHidden(0, true);
-    //ui->tableView->setColumnHidden(3, true);
+    ui->tableView->setColumnHidden(0, true);
     ui->tableView->show();
     model->setHeaderData(1, Qt::Horizontal, "Название Групп");
     model->setHeaderData(2, Qt::Horizontal, "Год");
+    model->setHeaderData(3, Qt::Horizontal, "Специальность");
 
     QHeaderView *pHW = ui->tableView->horizontalHeader(); //Нрмальный размер колонок
     int count = pHW->count();
