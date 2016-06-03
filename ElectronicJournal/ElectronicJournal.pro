@@ -16,7 +16,9 @@ deployment.path = /assets
 INSTALLS += deployment
 
 SOURCES += main.cpp\
-        mainform.cpp \
+	mainwindow.cpp \
+    mainform.cpp \
+	settings.cpp \
     worktables.cpp \
     spravochniki.cpp \
     formdiscipline.cpp \
@@ -36,7 +38,9 @@ SOURCES += main.cpp\
     tablelistworks.cpp \
     tablemadeworks.cpp
 
-HEADERS  += mainform.h \
+HEADERS  += mainwindow.h \
+	mainform.h \
+	settings.h \
     worktables.h \
     spravochniki.h \
     formdiscipline.h \
@@ -56,7 +60,8 @@ HEADERS  += mainform.h \
     tablelistworks.h \
     tablemadeworks.h
 
-FORMS    += mainform.ui \
+FORMS    += mainwindow.ui \
+	mainform.ui \
     worktables.ui \
     spravochniki.ui \
     formdiscipline.ui \
@@ -79,4 +84,5 @@ FORMS    += mainform.ui \
 CONFIG += mobility
 MOBILITY = 
 
-
+CONFIG += release c++11 
+QMAKE_CXXFLAGS += -std=c++11
