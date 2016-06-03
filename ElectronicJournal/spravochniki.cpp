@@ -11,7 +11,8 @@ Spravochniki::Spravochniki( const SettingsPtr & settings, QWidget * parent ) :
     ui->setupUi(this);
 
     discipline = new FormDiscipline(m_settings);
-    connect(ui->pushButton, SIGNAL(clicked()), discipline, SLOT(show()));
+    //connect(ui->pushButton, SIGNAL(clicked()), discipline, SLOT(show()));
+    connect( ui->pushButton, SIGNAL( clicked() ), this, SLOT( on_pushButton_clicked() ) );
 
     specialty = new FormSpecialty(m_settings);
     connect(ui->pushButton_2, SIGNAL(clicked()), specialty, SLOT(show()));
@@ -37,10 +38,10 @@ Spravochniki::~Spravochniki()
 void Spravochniki::on_pushButton_clicked()
 {
     //Setting use
-    int setting1 = m_settings->getSetting1();
+    //int setting1 = m_settings->getSetting1();
 
     //Setting set
-    m_settings->setSetting1( 1 );
+    //m_settings->setSetting1( 1 );
 
     QSqlTableModel *mod = new QSqlTableModel(0, db);
     mod->setEditStrategy(QSqlTableModel::OnManualSubmit);
@@ -48,7 +49,9 @@ void Spravochniki::on_pushButton_clicked()
     mod->select();
 
     discipline->Init(mod);
-    discipline->show();
+    //discipline->show();
+
+    emit newWindow( discipline );
 }
 
 void Spravochniki::on_pushButton_2_clicked()
