@@ -11,7 +11,7 @@ WorkTables::WorkTables(const SettingsPtr &settings, QWidget *parent) :
     ui->setupUi(this);
 
     toPlan = new ToPlan(settings);
-    connect(ui->pushButton, SIGNAL(clicked()), toPlan, SLOT(show()));
+    connect(ui->pushButton, SIGNAL(clicked()), toPlan, SLOT(on_pushButton_clicked()));
 
     toCompGroup = new ToCompositionGroup(settings);
     connect(ui->pushButton_2, SIGNAL(clicked()), toCompGroup, SLOT(show()));
@@ -40,7 +40,9 @@ void WorkTables::on_pushButton_clicked()
     mod2->setQuery("select n_spec from specialty;");
 
     toPlan->Init(mod1, mod2);
-    toPlan->show();
+    //toPlan->show();
+
+    emit newWindow(toPlan);
 }
 
 void WorkTables::on_pushButton_2_clicked()

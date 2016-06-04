@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>356</width>
-    <height>545</height>
+    <width>389</width>
+    <height>491</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
     <widget class="QPushButton" name="backButton">
      <property name="font">
       <font>
-       <pointsize>47</pointsize>
+       <pointsize>35</pointsize>
       </font>
      </property>
      <property name="text">
@@ -44,7 +44,7 @@
     <widget class="QPushButton" name="nextButton">
      <property name="font">
       <font>
-       <pointsize>47</pointsize>
+       <pointsize>35</pointsize>
       </font>
      </property>
      <property name="text">

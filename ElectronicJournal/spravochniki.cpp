@@ -15,19 +15,19 @@ Spravochniki::Spravochniki( const SettingsPtr & settings, QWidget * parent ) :
     connect( ui->pushButton, SIGNAL( clicked() ), this, SLOT( on_pushButton_clicked() ) );
 
     specialty = new FormSpecialty(m_settings);
-    connect(ui->pushButton_2, SIGNAL(clicked()), specialty, SLOT(show()));
+    connect(ui->pushButton_2, SIGNAL(clicked()), specialty, SLOT(on_pushButton_2_clicked()));
 
     typeWorks = new FormTypeWorks(m_settings);
-    connect(ui->pushButton_3, SIGNAL(clicked()), typeWorks, SLOT(show()));
+    connect(ui->pushButton_3, SIGNAL(clicked()), typeWorks, SLOT(on_pushButton_3_clicked()));
 
     faculty = new FormFaculty(m_settings);
-    connect(ui->pushButton_4, SIGNAL(clicked()), faculty, SLOT(show()));
+    connect(ui->pushButton_4, SIGNAL(clicked()), faculty, SLOT(on_pushButton_4_clicked()));
 
     students = new FormStudents(m_settings);
-    connect(ui->pushButton_5, SIGNAL(clicked()), students, SLOT(show()));
+    connect(ui->pushButton_5, SIGNAL(clicked()), students, SLOT(on_pushButton_5_clicked()));
 
     group = new FormGroup(m_settings);
-    connect(ui->pushButton_6, SIGNAL(clicked()), group, SLOT(show()));
+    connect(ui->pushButton_6, SIGNAL(clicked()), group, SLOT(on_pushButton_6_clicked()));
 }
 
 Spravochniki::~Spravochniki()
@@ -51,7 +51,7 @@ void Spravochniki::on_pushButton_clicked()
     discipline->Init(mod);
     //discipline->show();
 
-    emit newWindow( discipline );
+    emit newWindow(discipline);
 }
 
 void Spravochniki::on_pushButton_2_clicked()
@@ -63,7 +63,9 @@ void Spravochniki::on_pushButton_2_clicked()
     mod->select();
 
     specialty->Init(mod);
-    specialty->show();
+    //specialty->show();
+
+    emit newWindow(specialty);
 }
 
 void Spravochniki::on_pushButton_3_clicked()
@@ -74,7 +76,9 @@ void Spravochniki::on_pushButton_3_clicked()
     mod->select();
 
     typeWorks->Init(mod);
-    typeWorks->show();
+    //typeWorks->show();
+
+    emit newWindow(typeWorks);
 }
 
 void Spravochniki::on_pushButton_4_clicked()
@@ -85,7 +89,9 @@ void Spravochniki::on_pushButton_4_clicked()
     mod->select();
 
     faculty->Init(mod);
-    faculty->show();
+    //faculty->show();
+
+    emit newWindow(faculty);
 }
 
 void Spravochniki::on_pushButton_5_clicked()
@@ -96,7 +102,9 @@ void Spravochniki::on_pushButton_5_clicked()
     mod->select();
 
     students->Init(mod);
-    students->show();
+    //students->show();
+
+    emit newWindow(students);
 }
 
 void Spravochniki::on_pushButton_6_clicked()
@@ -108,5 +116,7 @@ void Spravochniki::on_pushButton_6_clicked()
     mod->select();
 
     group->Init(mod);
-    group->show();
+    //group->show();
+
+    emit newWindow(group);
 }

@@ -8,6 +8,9 @@ QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+CONFIG += release c++11
+QMAKE_CXXFLAGS += -std=c++11
+
 TARGET = ElectronicJournal
 TEMPLATE = app
 
@@ -16,9 +19,7 @@ deployment.path = /assets
 INSTALLS += deployment
 
 SOURCES += main.cpp\
-	mainwindow.cpp \
-    mainform.cpp \
-	settings.cpp \
+        mainform.cpp \
     worktables.cpp \
     spravochniki.cpp \
     formdiscipline.cpp \
@@ -36,11 +37,11 @@ SOURCES += main.cpp\
     tablecompositiongroup.cpp \
     tablevisit.cpp \
     tablelistworks.cpp \
-    tablemadeworks.cpp
+    tablemadeworks.cpp \
+    mainwindow.cpp \
+    settings.cpp
 
-HEADERS  += mainwindow.h \
-	mainform.h \
-	settings.h \
+HEADERS  += mainform.h \
     worktables.h \
     spravochniki.h \
     formdiscipline.h \
@@ -58,10 +59,11 @@ HEADERS  += mainwindow.h \
     tablecompositiongroup.h \
     tablevisit.h \
     tablelistworks.h \
-    tablemadeworks.h
+    tablemadeworks.h \
+    mainwindow.h \
+    settings.h
 
-FORMS    += mainwindow.ui \
-	mainform.ui \
+FORMS    += mainform.ui \
     worktables.ui \
     spravochniki.ui \
     formdiscipline.ui \
@@ -79,10 +81,10 @@ FORMS    += mainwindow.ui \
     tablecompositiongroup.ui \
     tablevisit.ui \
     tablelistworks.ui \
-    tablemadeworks.ui
+    tablemadeworks.ui \
+    mainwindow.ui
 
 CONFIG += mobility
 MOBILITY = 
 
-CONFIG += release c++11 
-QMAKE_CXXFLAGS += -std=c++11
+

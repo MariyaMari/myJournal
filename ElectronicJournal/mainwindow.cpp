@@ -29,10 +29,10 @@ void    MainWindow::on_backButton_clicked()
     {
         return;
     }
-     
+
     --m_currentWidget;
 
-    auto widget = m_widgets.value( m_currentWidget );
+    QWidget * widget = m_widgets.value( m_currentWidget );
     m_ui.dockWidget->setWidget( widget );
     updateButtons();
 }
@@ -46,7 +46,7 @@ void    MainWindow::on_nextButton_clicked()
 
     ++m_currentWidget;
 
-    auto widget = m_widgets.value( m_currentWidget );
+    QWidget * widget = m_widgets.value( m_currentWidget );
     m_ui.dockWidget->setWidget( widget );
     updateButtons();
 }
@@ -57,7 +57,7 @@ void    MainWindow::setWidget( QWidget * widget )
     {
         //m_widgets.removeAll( widget );
     }
-    
+
     m_widgets.push_back( widget );
     ++m_currentWidget;
     m_ui.dockWidget->setWidget( widget );

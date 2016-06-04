@@ -33,6 +33,10 @@ private:
     TablePlan *plan;
 
     SettingsPtr m_settings;
+
+signals:
+    void    newWindow( QWidget * widget );
+
 };
 
 #endif // TOPLAN_H

@@ -46,6 +46,10 @@ private:
     ToMadeWorks *toMadeWorks;
 
     SettingsPtr m_settings;
+
+signals:
+    void    newWindow( QWidget * widget );
+
 };
 
 #endif // WORKTABLES_H
