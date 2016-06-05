@@ -2,6 +2,9 @@
 #ifndef SETTINGS_HPP
 #define SETTINGS_HPP
 #include <QSharedPointer>
+#include <QSqlDatabase>
+
+typedef QSharedPointer< QSqlDatabase > QSqlDatabasePtr;
 
 /*! @~russian
 @brief Класс, реализующий настройки программы
@@ -14,11 +17,10 @@ public:
     Settings();
     ~Settings();
 
-    int     getSetting1() const;
-    void    setSetting1( int newValue );
+    const QSqlDatabasePtr   getDB() const;
 
 private:
-    int     m_setting1;
+    QSqlDatabasePtr     m_db;
 
 };
 typedef QSharedPointer< Settings > SettingsPtr;

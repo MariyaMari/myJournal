@@ -1,15 +1,13 @@
 #include "settings.h"
 
 Settings::Settings() :
-    m_setting1( 0 /* Default value */ ) {}
+    m_db( &QSqlDatabase::addDatabase( "QSQLITE" ) ) {
+    m_db->setDatabaseName( "test.db" );
+    m_db->open();
+}
 
 Settings::~Settings() {}
 
-int Settings::getSetting1() const {
-    return m_setting1;
-}
-
-void Settings::setSetting1( int newValue )
-{
-    m_setting1 = newValue;
+const QSqlDatabasePtr   Settings::getDB() const {
+    return m_db;
 }
