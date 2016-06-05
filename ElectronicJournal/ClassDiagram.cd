@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TableCompositionGroup" Collapsed="true">
+    <Position X="24" Y="3" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAQEgAAAAAAAAAAAAAAAAAAAAACAAAMAAA=</HashCode>
+      <FileName>tablecompositiongroup.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spravochniki" Collapsed="true">
+    <Position X="10.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAgBAgAAQEgAAQAAAAAIAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>spravochniki.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TableListWorks" Collapsed="true">
+    <Position X="17.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAwEgAAAAAAAAAAAAAAAAAAAAACAAAIAAA=</HashCode>
+      <FileName>tablelistworks.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TableMadeWorks" Collapsed="true">
+    <Position X="31" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQEgAAAAAAAAAAACAAAAAAAAACAAAIAAA=</HashCode>
+      <FileName>tablemadeworks.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QWidget" Collapsed="true">
+    <Position X="26.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hA6pAGgYqIASoYVAaL8yqpBimu1GwLWO4PBiCgXdwII=</HashCode>
+      <FileName>d:\Qt\5.6.0\5.6\msvc2015_64\include\QtWidgets\qwidget.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AddGroup" Collapsed="true">
+    <Position X="44.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAQEgAQAAAAAAAAAAAEAAAAAAACAACAAAA=</HashCode>
+      <FileName>addgroup.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AddSpecialty" Collapsed="true">
+    <Position X="37.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQEgAAAAAABAAAAAAAAAAAAAACAEAAAAA=</HashCode>
+      <FileName>addspecialty.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormDiscipline" Collapsed="true">
+    <Position X="35.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAQEgAQAAAAAACAAAAAAAAAAAACAAAIAAA=</HashCode>
+      <FileName>formdiscipline.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormFaculty" Collapsed="true">
+    <Position X="26.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAQEgAAAAAAgAAAAAAAAAAAAAACAAAIAAA=</HashCode>
+      <FileName>formfaculty.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormGroup" Collapsed="true">
+    <Position X="8" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAABAAAAAAAQEgAAAAAAAAAAAAAAAAAAAAACAABIAAA=</HashCode>
+      <FileName>formgroup.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormSpecialty" Collapsed="true">
+    <Position X="15" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAQEgAAAAAAABQAAAAAAAAACAICAAAIAAA=</HashCode>
+      <FileName>formspecialty.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormStudents" Collapsed="true">
+    <Position X="21.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAQEgAAAAAAAAAQAAAAAAAAAAACAAAIAAA=</HashCode>
+      <FileName>formstudents.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormTypeWorks" Collapsed="true">
+    <Position X="28.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAQFgAAAAAAAAAAAAAAAAAAAAACAAAIAAA=</HashCode>
+      <FileName>formtypeworks.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainForm" Collapsed="true">
+    <Position X="40" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAACAAAAAAAgAQAAAAAAIAAAQAABAgAAAAAAAAAAA=</HashCode>
+      <FileName>mainform.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainWindow" Collapsed="true">
+    <Position X="46.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAABAAAAgIABAAAAAAEAAAAAAAgAAAACEAAAAA=</HashCode>
+      <FileName>mainwindow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TablePlan" Collapsed="true">
+    <Position X="33.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAQEgAAAAAAAAAAAAAAAAAQAAACAAAIAAA=</HashCode>
+      <FileName>tableplan.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TableVisit" Collapsed="true">
+    <Position X="12.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAABAAAAAAQEgAAAAAAAAAAAAAAAAAAAAACAAAIAAA=</HashCode>
+      <FileName>tablevisit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ToCompositionGroup" Collapsed="true">
+    <Position X="42.25" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAQEgAAAAAAAAACAAAAAEAAAAACAAAAAAA=</HashCode>
+      <FileName>tocompositiongroup.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ToListWorks" Collapsed="true">
+    <Position X="49" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQEgAAIAAAAAAAAIAAAEAEAAACACAAAAA=</HashCode>
+      <FileName>tolistworks.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ToMadeWorks" Collapsed="true">
+    <Position X="19.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAQEgAwIAAAAAAAAAAAAIAAAAACACAAAAA=</HashCode>
+      <FileName>tomadeworks.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ToPlan" Collapsed="true">
+    <Position X="5.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQEgAAAAAAAAAAAAEAAEAEAAACAAAAQAA=</HashCode>
+      <FileName>toplan.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ToVisit" Collapsed="true">
+    <Position X="3.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQEgAQIAAEAAAAAAAAAAAAAAACACEAAAA=</HashCode>
+      <FileName>tovisit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -464,5 +464,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ElectronicJournal.pro" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
