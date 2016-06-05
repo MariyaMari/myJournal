@@ -30,6 +30,8 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void closeAddSpec();
+
     void QueryInserted(QString query);
 
 private:

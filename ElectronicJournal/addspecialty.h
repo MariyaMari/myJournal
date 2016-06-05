@@ -22,7 +22,8 @@ public:
     void Init(QSqlQueryModel *mod1, QSqlDatabase &db);
 
 signals:
-    void InsertQuery(QString query);
+    void    InsertQuery(QString query);
+    void    closeThisWidget();
 
 private slots:
     void on_pushButton_clicked();

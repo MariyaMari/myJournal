@@ -36,6 +36,6 @@ void AddSpecialty::on_pushButton_clicked()
     QString pot = potModel->record(0).field(0).value().toString();
 
     QString query = "insert into specialty (n_spec, id_fac) values ('" + ui->lineEdit->text() + "', " + pot + ");";
-
-
+    
+    emit closeThisWidget();
 }

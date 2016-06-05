@@ -10,9 +10,10 @@ FormSpecialty::FormSpecialty(const SettingsPtr &settings, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    addSpec = new AddSpecialty(settings);
+    addSpec = new AddSpecialty( settings );
     connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(on_pushButton_2_clicked()));
-    connect(addSpec, SIGNAL(InsertQuery(QString)), this, SLOT(QueryInserted(QString)));
+    connect( addSpec, SIGNAL(InsertQuery(QString)), this, SLOT(QueryInserted(QString)));
+    connect( addSpec, SIGNAL( closeThisWidget() ), this, SLOT( closeAddSpec() ) );
 }
 
 FormSpecialty::~FormSpecialty()
@@ -55,6 +56,11 @@ void FormSpecialty::on_pushButton_3_clicked() //Подтвердить
     if(!model->submitAll())
         QMessageBox::warning(this, "Error", model->lastError().text());
     model->select();
+}
+
+void    FormSpecialty::closeAddSpec()
+{
+    emit newWindow( this );
 }
 
 void FormSpecialty::QueryInserted(QString query)
