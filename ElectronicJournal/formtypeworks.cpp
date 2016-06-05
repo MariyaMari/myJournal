@@ -9,6 +9,12 @@ FormTypeWorks::FormTypeWorks(const SettingsPtr &settings, QWidget *parent) :
     m_settings(settings)
 {
     ui->setupUi(this);
+
+    model = new QSqlTableModel(0, db);
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setTable("typerabot");
+    model->select();
+    Init();
 }
 
 FormTypeWorks::~FormTypeWorks()
@@ -16,11 +22,15 @@ FormTypeWorks::~FormTypeWorks()
     delete ui;
 }
 
-void FormTypeWorks::Init(QSqlTableModel *mod)
+void FormTypeWorks::Update()
 {
-    this->model = mod;
+    model->select();
+}
+
+void FormTypeWorks::Init()
+{
     ui->tableView->setModel(model);
-    //ui->tableView->setColumnHidden(0, true);
+    ui->tableView->setColumnHidden(0, true);
     ui->tableView->show();
     model->setHeaderData(1, Qt::Horizontal, "Тип Работы");
 

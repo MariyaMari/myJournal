@@ -9,7 +9,7 @@ ToVisit::ToVisit(const SettingsPtr &settings, QWidget *parent) :
     ui->setupUi(this);
 
     visit = new TableVisit(settings);
-    connect(ui->pushButton, SIGNAL(clicked()), visit, SLOT(show()));
+    connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
 }
 
 ToVisit::~ToVisit()
@@ -44,5 +44,6 @@ void ToVisit::on_pushButton_clicked()
                    + ";");
 
     visit->Init(mod);
-    visit->show();
+    //visit->show();
+    emit newWindow(visit);
 }

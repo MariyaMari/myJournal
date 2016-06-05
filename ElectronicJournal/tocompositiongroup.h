@@ -32,6 +32,10 @@ private:
     TableCompositionGroup *compGrup;
 
     SettingsPtr m_settings;
+
+signals:
+    void    newWindow( QWidget * widget );
+
 };
 
 #endif // TOCOMPOSITIONGROUP_H

@@ -10,6 +10,13 @@ FormDiscipline::FormDiscipline(const SettingsPtr &settings, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    model = new QSqlTableModel(0, db);
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setTable("disciplina");
+    model->select();
+    Init();
+
+
     QIcon remove("remove.png"); //Иконки на кнопки
     ui->pushButton->setIcon(remove);
 }
@@ -19,9 +26,13 @@ FormDiscipline::~FormDiscipline()
     delete ui;
 }
 
-void FormDiscipline::Init(QSqlTableModel *mod)
+void FormDiscipline::Update()
 {
-    this->model = mod;
+    model->select();
+}
+
+void FormDiscipline::Init()
+{
     ui->tableView->setModel(model);
     ui->tableView->setColumnHidden(0, true);
     ui->tableView->show();

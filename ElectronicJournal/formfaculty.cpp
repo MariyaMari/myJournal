@@ -9,6 +9,12 @@ FormFaculty::FormFaculty(const SettingsPtr &settings, QWidget *parent) :
     m_settings(settings)
 {
     ui->setupUi(this);
+
+    model = new QSqlTableModel(0, db);
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setTable("facultet");
+    model->select();
+    Init();
 }
 
 FormFaculty::~FormFaculty()
@@ -16,11 +22,15 @@ FormFaculty::~FormFaculty()
     delete ui;
 }
 
-void FormFaculty::Init(QSqlTableModel *mod)
+void FormFaculty::Update()
 {
-    this->model = mod;
+    model->select();
+}
+
+void FormFaculty::Init()
+{
     ui->tableView->setModel(model);
-    //ui->tableView->setColumnHidden(0, true);
+    ui->tableView->setColumnHidden(0, true);
     ui->tableView->show();
     model->setHeaderData(1, Qt::Horizontal, "Название Факультета");
 

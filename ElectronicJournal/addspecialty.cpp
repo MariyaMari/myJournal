@@ -30,12 +30,17 @@ void AddSpecialty::on_pushButton_clicked()
         return;
     }
 
+    modFac = new QSqlQueryModel();
+    modFac->setQuery("select n_spec from specialty;");
+    ui->comboBox->setModel(modFac);
+
     QSqlQueryModel *potModel = new QSqlQueryModel();
     potModel->setQuery("select id_fac from facultet where n_fac = '" + ui->comboBox->currentText() + "';");
 
     QString pot = potModel->record(0).field(0).value().toString();
 
     QString query = "insert into specialty (n_spec, id_fac) values ('" + ui->lineEdit->text() + "', " + pot + ");";
-    
+
+    emit InsertQuery(query);
     emit closeThisWidget();
 }

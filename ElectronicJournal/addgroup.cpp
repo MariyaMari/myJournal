@@ -21,12 +21,6 @@ void AddGroup::Init(QSqlQueryModel *mod1, QSqlDatabase &db)
     ui->comboBox->setModel(mod1);
 }
 
-void AddGroup::closeEvent(QCloseEvent *e)
-{
-    emit Closed();
-    QWidget::closeEvent(e);
-}
-
 void AddGroup::on_pushButton_clicked()
 {
     if(ui->lineEdit->text() == "" || ui->lineEdit_2->text() == "" )
@@ -40,14 +34,11 @@ void AddGroup::on_pushButton_clicked()
 
     QString pot = potModel->record(0).field(0).value().toString();
 
-    QString query = "insert into gruppa (n_gr, _year, id_spec) values ('" + ui->lineEdit->text() + "', " + ui->lineEdit_2->text()
-            + ", " + pot + ");";
+    QString query = "insert into gruppa (n_gr, _year, id_spec) values ('" + ui->lineEdit->text() + "', "
+                                                                          + ui->lineEdit_2->text() + ", "
+                                                                          + pot + ");";
 
     emit InsertQuery(query);
+    emit closeThisWidget();
 }
 
-void AddGroup::on_pushButton_2_clicked()
-{
-    emit Closed();
-    this->close();
-}

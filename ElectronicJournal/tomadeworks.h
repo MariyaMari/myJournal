@@ -32,6 +32,10 @@ private:
     TableMadeWorks *madeWorks;
 
     SettingsPtr m_settings;
+
+signals:
+    void    newWindow( QWidget * widget );
+
 };
 
 #endif // TOMADEWORKS_H

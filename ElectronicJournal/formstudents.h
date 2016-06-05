@@ -20,7 +20,8 @@ public:
     QSqlDatabase db;
     QSqlTableModel *model;
 
-    void Init(QSqlTableModel *mod);
+    void Init();
+    void Update();
 
 private slots:
     void on_pushButton_clicked();

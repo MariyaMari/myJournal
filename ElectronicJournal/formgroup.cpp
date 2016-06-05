@@ -10,9 +10,17 @@ FormGroup::FormGroup(const SettingsPtr &settings, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    model = new QSqlRelationalTableModel(0, db);
+    model->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
+    model->setTable("gruppa");
+    model->setRelation(3, QSqlRelation("specialty", "id_spec", "n_spec"));
+    model->select();
+    Init();
+
     addGrup = new AddGroup(settings);
     connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(on_pushButton_2_clicked()));
-
+    connect(addGrup, SIGNAL(InsertQuery(QString)), this, SLOT(QueryInserted(QString)));
+    connect(addGrup, SIGNAL(closeThisWidget()), this, SLOT(closeAddSpec()));
 }
 
 FormGroup::~FormGroup()
@@ -20,9 +28,13 @@ FormGroup::~FormGroup()
     delete ui;
 }
 
-void FormGroup::Init(QSqlRelationalTableModel *mod)
+void FormGroup::Update()
 {
-    this->model = mod;
+    model->select();
+}
+
+void FormGroup::Init()
+{
     ui->tableView->setModel(model);
     ui->tableView->setColumnHidden(0, true);
     ui->tableView->show();
@@ -56,4 +68,17 @@ void FormGroup::on_pushButton_3_clicked() //Подтвердить
     if(!model->submitAll())
         QMessageBox::warning(this, "Error", model->lastError().text());
     model->select();
+}
+
+void FormGroup::closeAddSpec()
+{
+    emit newWindow(this);
+}
+
+void FormGroup::QueryInserted(QString query)
+{
+    QSqlQuery q;
+    if(!q.exec(query))
+        QMessageBox::warning(this, "Error 1", q.lastError().text());
+    model->submitAll();
 }

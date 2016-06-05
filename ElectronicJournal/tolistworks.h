@@ -32,6 +32,10 @@ private:
     TableListWorks *listWorks;
 
     SettingsPtr m_settings;
+
+signals:
+    void    newWindow( QWidget * widget );
+
 };
 
 #endif // TOLISTWORKS_H

@@ -9,7 +9,7 @@ ToListWorks::ToListWorks(const SettingsPtr &settings, QWidget *parent) :
     ui->setupUi(this);
 
     listWorks = new TableListWorks(settings);
-    connect(ui->pushButton, SIGNAL(clicked()), listWorks, SLOT(show()));
+    connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
 }
 
 ToListWorks::~ToListWorks()
@@ -48,5 +48,6 @@ void ToListWorks::on_pushButton_clicked()
                    + ";");
 
     listWorks->Init(mod);
-    listWorks->show();
+    //listWorks->show();
+    emit newWindow(listWorks);
 }

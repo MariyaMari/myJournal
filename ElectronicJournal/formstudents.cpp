@@ -9,6 +9,12 @@ FormStudents::FormStudents(const SettingsPtr &settings, QWidget *parent) :
     m_settings(settings)
 {
     ui->setupUi(this);
+
+    model = new QSqlTableModel(0, db);
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setTable("students");
+    model->select();
+    Init();
 }
 
 FormStudents::~FormStudents()
@@ -16,11 +22,15 @@ FormStudents::~FormStudents()
     delete ui;
 }
 
-void FormStudents::Init(QSqlTableModel *mod)
+void FormStudents::Update()
 {
-    this->model = mod;
+    model->select();
+}
+
+void FormStudents::Init()
+{
     ui->tableView->setModel(model);
-    //ui->tableView->setColumnHidden(0, true);
+    ui->tableView->setColumnHidden(0, true);
     ui->tableView->show();
     model->setHeaderData(1, Qt::Horizontal, "ФИО Студента");
 

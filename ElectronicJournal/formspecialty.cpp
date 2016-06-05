@@ -10,10 +10,17 @@ FormSpecialty::FormSpecialty(const SettingsPtr &settings, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    addSpec = new AddSpecialty( settings );
+    model = new QSqlRelationalTableModel(0, db);
+    model->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
+    model->setTable("specialty");
+    model->setRelation(2, QSqlRelation("facultet", "id_fac", "n_fac"));
+    model->select();
+    Init();
+
+    addSpec = new AddSpecialty(settings);
     connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(on_pushButton_2_clicked()));
-    connect( addSpec, SIGNAL(InsertQuery(QString)), this, SLOT(QueryInserted(QString)));
-    connect( addSpec, SIGNAL( closeThisWidget() ), this, SLOT( closeAddSpec() ) );
+    connect(addSpec, SIGNAL(InsertQuery(QString)), this, SLOT(QueryInserted(QString)));
+    connect(addSpec, SIGNAL(closeThisWidget()), this, SLOT(closeAddSpec()));
 }
 
 FormSpecialty::~FormSpecialty()
@@ -21,9 +28,13 @@ FormSpecialty::~FormSpecialty()
     delete ui;
 }
 
-void FormSpecialty::Init(QSqlRelationalTableModel *mod)
+void FormSpecialty::Update()
 {
-    this->model = mod;
+    model->select();
+}
+
+void FormSpecialty::Init()
+{
     ui->tableView->setModel(model);
     ui->tableView->setColumnHidden(0, true);
     ui->tableView->show();
@@ -58,9 +69,9 @@ void FormSpecialty::on_pushButton_3_clicked() //Подтвердить
     model->select();
 }
 
-void    FormSpecialty::closeAddSpec()
+void FormSpecialty::closeAddSpec()
 {
-    emit newWindow( this );
+    emit newWindow(this);
 }
 
 void FormSpecialty::QueryInserted(QString query)

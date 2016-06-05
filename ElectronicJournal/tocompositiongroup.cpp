@@ -9,7 +9,7 @@ ToCompositionGroup::ToCompositionGroup(const SettingsPtr &settings, QWidget *par
     ui->setupUi(this);
 
     compGrup = new TableCompositionGroup(settings);
-    connect(ui->pushButton, SIGNAL(clicked()), compGrup, SLOT(show()));
+    connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
 }
 
 ToCompositionGroup::~ToCompositionGroup()
@@ -37,5 +37,6 @@ void ToCompositionGroup::on_pushButton_clicked()
                     "AND semes=" + ui->comboBox->currentText() + ";");
 
     compGrup->Init(mod);
-    compGrup->show();
+    //compGrup->show();
+    emit newWindow(compGrup);
 }

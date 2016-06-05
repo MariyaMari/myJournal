@@ -9,7 +9,7 @@ ToMadeWorks::ToMadeWorks(const SettingsPtr &settings, QWidget *parent) :
     ui->setupUi(this);
 
     madeWorks = new TableMadeWorks(settings);
-    connect(ui->pushButton, SIGNAL(clicked()), madeWorks, SLOT(show()));
+    connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
 }
 
 ToMadeWorks::~ToMadeWorks()
@@ -44,5 +44,6 @@ void ToMadeWorks::on_pushButton_clicked()
 //                   "AND semes=" + ui->comboBox->currentText() + ";");
 
     madeWorks->Init(mod);
-    madeWorks->show();
+    //madeWorks->show();
+    emit newWindow(madeWorks);
 }

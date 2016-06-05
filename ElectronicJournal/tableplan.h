@@ -33,6 +33,7 @@ private:
     Ui::TablePlan *ui;
 
     SettingsPtr m_settings;
+
 };
 
 #endif // TABLEPLAN_H

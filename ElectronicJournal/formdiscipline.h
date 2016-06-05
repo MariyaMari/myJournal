@@ -20,7 +20,8 @@ public:
     QSqlDatabase db;
     QSqlTableModel *model;
 
-    void Init(QSqlTableModel *mod);
+    void Init();
+    void Update();
 
 protected:
     void closeEvent(QCloseEvent *e);

@@ -1,6 +1,7 @@
 #pragma once
 #ifndef SETTINGS_HPP
 #define SETTINGS_HPP
+
 #include <QSharedPointer>
 #include <QSqlDatabase>
 
@@ -17,10 +18,10 @@ public:
     Settings();
     ~Settings();
 
-    const QSqlDatabasePtr   getDB() const;
+    const QSqlDatabasePtr getDB() const;
 
 private:
-    QSqlDatabasePtr     m_db;
+    QSqlDatabasePtr m_db;
 
 };
 typedef QSharedPointer< Settings > SettingsPtr;

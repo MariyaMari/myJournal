@@ -33,6 +33,10 @@ private:
     TableVisit *visit;
 
     SettingsPtr m_settings;
+
+signals:
+    void    newWindow( QWidget * widget );
+
 };
 
 #endif // TOVISIT_H

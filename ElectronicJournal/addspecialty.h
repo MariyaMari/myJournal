@@ -18,11 +18,12 @@ public:
     ~AddSpecialty();
 
     QSqlDatabase *db;
+    QSqlQueryModel *modFac;
 
     void Init(QSqlQueryModel *mod1, QSqlDatabase &db);
 
 signals:
-    void    InsertQuery(QString query);
+    void InsertQuery(QString query);
     void    closeThisWidget();
 
 private slots:

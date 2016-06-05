@@ -9,7 +9,8 @@ ToPlan::ToPlan(const SettingsPtr &settings, QWidget *parent) :
     ui->setupUi(this);
 
     plan = new TablePlan(settings);
-    connect(ui->pushButton, SIGNAL(clicked()), plan, SLOT(on_pushButton_clicked()));
+    connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
+
 }
 
 ToPlan::~ToPlan()
@@ -46,7 +47,6 @@ void ToPlan::on_pushButton_clicked()
     mod->setFilter("id_dis=" + pot);*/
 
     plan->Init(mod);
-    plan->show();
-
+    //plan->show();
     emit newWindow(plan);
 }

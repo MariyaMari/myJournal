@@ -8,19 +8,13 @@ MainForm::MainForm( const SettingsPtr & settings, QWidget * parent ) :
 {
     m_ui.setupUi( this );
 
-    //spisokSpravochniki = new Spravochniki( m_settings );
-    //connect(m_ui.pushButton, SIGNAL(clicked()), spisokSpravochniki, SLOT(show()));
-
-    //spisokWorkTables = new WorkTables( m_settings );
-    //connect(m_ui.pushButton_2, SIGNAL(clicked()), spisokWorkTables, SLOT(show()));
-
     connect( &m_spisokSpravochniki, SIGNAL( newWindow( QWidget * ) ), this, SIGNAL( newWindow( QWidget * ) ) );
     connect( &m_spisokWorkTables, SIGNAL( newWindow( QWidget * ) ), this, SIGNAL( newWindow( QWidget * ) ) );
 
     connect( m_ui.pushButton, SIGNAL( clicked() ), this, SLOT( on_pushButton_clicked() ) );
     connect( m_ui.pushButton_2, SIGNAL( clicked() ), this, SLOT( on_pushButton_2_clicked() ) );
 
-    connectToDatabase();
+//    connectToDatabase();
 }
 
 MainForm::~MainForm() {}

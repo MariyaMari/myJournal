@@ -21,17 +21,12 @@ public:
 
     void Init(QSqlQueryModel *mod1, QSqlDatabase &db);
 
-protected:
-    void closeEvent(QCloseEvent *e);
-
 signals:
     void InsertQuery(QString query);
-    void Closed();
+    void closeThisWidget();
 
 private slots:
     void on_pushButton_clicked();
-
-    void on_pushButton_2_clicked();
 
 private:
     Ui::AddGroup *ui;
