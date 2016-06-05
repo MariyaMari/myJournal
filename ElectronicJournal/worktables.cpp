@@ -11,19 +11,24 @@ WorkTables::WorkTables(const SettingsPtr &settings, QWidget *parent) :
     ui->setupUi(this);
 
     toPlan = new ToPlan(settings);
-    connect(ui->pushButton, SIGNAL(clicked()), toPlan, SLOT(on_pushButton_clicked()));
+    connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
+    connect(toPlan, SIGNAL(newWindow(QWidget *)), this, SIGNAL(newWindow(QWidget *)));
 
     toCompGroup = new ToCompositionGroup(settings);
-    connect(ui->pushButton_2, SIGNAL(clicked()), toCompGroup, SLOT(show()));
+    connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(on_pushButton_2_clicked()));
+    connect(toCompGroup, SIGNAL(newWindow(QWidget *)), this, SIGNAL(newWindow(QWidget *)));
 
     toVisit = new ToVisit(settings);
-    connect(ui->pushButton_3, SIGNAL(clicked()), toVisit, SLOT(show()));
+    connect(ui->pushButton_3, SIGNAL(clicked()), this, SLOT(on_pushButton_3_clicked()));
+    connect(toVisit, SIGNAL(newWindow(QWidget *)), this, SIGNAL(newWindow(QWidget *)));
 
     tolistWorks = new ToListWorks(settings);
-    connect(ui->pushButton_4, SIGNAL(clicked()), tolistWorks, SLOT(show()));
+    connect(ui->pushButton_4, SIGNAL(clicked()), this, SLOT(on_pushButton_4_clicked()));
+    connect(tolistWorks, SIGNAL(newWindow(QWidget *)), this, SIGNAL(newWindow(QWidget *)));
 
     toMadeWorks = new ToMadeWorks(settings);
-    connect(ui->pushButton_5, SIGNAL(clicked()), toMadeWorks, SLOT(show()));
+    connect(ui->pushButton_5, SIGNAL(clicked()), this, SLOT(on_pushButton_5_clicked()));
+    connect(toMadeWorks, SIGNAL(newWindow(QWidget *)), this, SIGNAL(newWindow(QWidget *)));
 }
 
 WorkTables::~WorkTables()
@@ -54,7 +59,9 @@ void WorkTables::on_pushButton_2_clicked()
     mod2->setQuery("select n_gr from gruppa;");
 
     toCompGroup->Init(mod1, mod2);
-    toCompGroup->show();
+    //toCompGroup->show();
+
+    emit newWindow(toCompGroup);
 }
 
 void WorkTables::on_pushButton_3_clicked()
@@ -69,7 +76,9 @@ void WorkTables::on_pushButton_3_clicked()
     mod3->setQuery("select n_trab from typerabot;");
 
     toVisit->Init(mod1, mod2, mod3);
-    toVisit->show();
+    //toVisit->show();
+
+    emit newWindow(toVisit);
 }
 
 void WorkTables::on_pushButton_4_clicked()
@@ -87,7 +96,9 @@ void WorkTables::on_pushButton_4_clicked()
     mod4->setQuery("select n_trab from typerabot;");
 
     tolistWorks->Init(mod1, mod2, mod3, mod4);
-    tolistWorks->show();
+    //tolistWorks->show();
+
+    emit newWindow(tolistWorks);
 }
 
 void WorkTables::on_pushButton_5_clicked()
@@ -105,5 +116,7 @@ void WorkTables::on_pushButton_5_clicked()
     mod4->setQuery("select n_trab from typerabot;");
 
     toMadeWorks->Init(mod1, mod2, mod3, mod4);
-    toMadeWorks->show();
+    //toMadeWorks->show();
+
+    emit newWindow(toMadeWorks);
 }

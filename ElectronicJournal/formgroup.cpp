@@ -9,6 +9,10 @@ FormGroup::FormGroup(const SettingsPtr &settings, QWidget *parent) :
     m_settings(settings)
 {
     ui->setupUi(this);
+
+    addGrup = new AddGroup(settings);
+    connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(on_pushButton_2_clicked()));
+
 }
 
 FormGroup::~FormGroup()
@@ -39,8 +43,12 @@ void FormGroup::on_pushButton_clicked() //Удалить
 
 void FormGroup::on_pushButton_2_clicked() //Добавить
 {
-    QSqlRecord newRec;
-    model->insertRecord(-1, newRec);
+    QSqlQueryModel *mod = new QSqlQueryModel();
+    mod->setQuery("select * from specialty;");
+
+    addGrup->Init(mod, db);
+    //addGrup->show();
+    emit newWindow(addGrup);
 }
 
 void FormGroup::on_pushButton_3_clicked() //Подтвердить

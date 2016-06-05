@@ -9,6 +9,10 @@ FormSpecialty::FormSpecialty(const SettingsPtr &settings, QWidget *parent) :
     m_settings(settings)
 {
     ui->setupUi(this);
+
+    addSpec = new AddSpecialty(settings);
+    connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(on_pushButton_2_clicked()));
+    connect(addSpec, SIGNAL(InsertQuery(QString)), this, SLOT(QueryInserted(QString)));
 }
 
 FormSpecialty::~FormSpecialty()
@@ -38,8 +42,12 @@ void FormSpecialty::on_pushButton_clicked() //Удалить
 
 void FormSpecialty::on_pushButton_2_clicked() //Добавить
 {
-    QSqlRecord newRec;
-    model->insertRecord(-1, newRec);
+    QSqlQueryModel *mod = new QSqlQueryModel();
+    mod->setQuery("select * from facultet;");
+
+    addSpec->Init(mod, db);
+    //addSpec->show();
+    emit newWindow(addSpec);
 }
 
 void FormSpecialty::on_pushButton_3_clicked() //Подтвердить
@@ -47,4 +55,12 @@ void FormSpecialty::on_pushButton_3_clicked() //Подтвердить
     if(!model->submitAll())
         QMessageBox::warning(this, "Error", model->lastError().text());
     model->select();
+}
+
+void FormSpecialty::QueryInserted(QString query)
+{
+    QSqlQuery q;
+    if(!q.exec(query))
+        QMessageBox::warning(this, "Error 1", q.lastError().text());
+    model->submitAll();
 }

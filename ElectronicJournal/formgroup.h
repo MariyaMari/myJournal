@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QtSql>
+#include "addgroup.h"
 #include "settings.h"
 
 namespace Ui {
@@ -32,7 +33,11 @@ private slots:
 private:
     Ui::FormGroup *ui;
 
+    AddGroup *addGrup;
     SettingsPtr m_settings;
+
+signals:
+    void    newWindow( QWidget * widget );
 };
 
 #endif // FORMGROUP_H

@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QtSql>
+#include "addspecialty.h"
 #include "settings.h"
 
 namespace Ui {
@@ -29,10 +30,16 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void QueryInserted(QString query);
+
 private:
     Ui::FormSpecialty *ui;
 
+    AddSpecialty *addSpec;
     SettingsPtr m_settings;
+
+signals:
+    void    newWindow( QWidget * widget );
 };
 
 #endif // FORMSPECIALTY_H
