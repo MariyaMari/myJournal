@@ -20,7 +20,9 @@ public:
     QSqlDatabase db;
     QSqlRelationalTableModel *model;
 
-    void Init(QSqlRelationalTableModel *mod);
+    void Init();
+    void Update();
+    void setNGr(const QString & text, const QString &text1);
 
 private:
     Ui::TableMadeWorks *ui;

@@ -9,6 +9,12 @@ TableListWorks::TableListWorks(const SettingsPtr &settings, QWidget *parent) :
     m_settings(settings)
 {
     ui->setupUi(this);
+
+    model = new QSqlRelationalTableModel(0, db);
+    model->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
+    model->setTable("link1");
+    model->select();
+    Init();
 }
 
 TableListWorks::~TableListWorks()
@@ -16,9 +22,26 @@ TableListWorks::~TableListWorks()
     delete ui;
 }
 
-void TableListWorks::Init(QSqlRelationalTableModel *mod)
+void TableListWorks::Update()
 {
-    this->model = mod;
+    model->select();
+}
+
+void TableListWorks::setNGr(const QString & text, const QString & text1, const QString & text2, const QString & text3)
+{
+    model->setFilter("id_trab=(SELECT typerabot.id_trab FROM typerabot WHERE typerabot.n_trab='"
+                   + text + "') "
+                   "AND id_dis=(SELECT disciplina.id_dis FROM disciplina WHERE disciplina.n_dis='"
+                   + text1 + "') "
+                   "AND id_spec=(SELECT specialty.id_spec FROM specialty WHERE specialty.n_spec='"
+                   + text2 + "') "
+                   + "AND semes=" + text3
+                   + ";");
+
+}
+
+void TableListWorks::Init()
+{
     ui->tableView->setModel(model);
     ui->tableView->setColumnHidden(0, true);
     ui->tableView->setColumnHidden(3, true);

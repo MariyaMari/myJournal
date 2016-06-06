@@ -9,6 +9,12 @@ TableCompositionGroup::TableCompositionGroup(const SettingsPtr &settings, QWidge
     m_settings(settings)
 {
     ui->setupUi(this);
+
+    model = new QSqlTableModel(0, db);
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setTable("sostavgr");
+    model->select();
+    Init();
 }
 
 TableCompositionGroup::~TableCompositionGroup()
@@ -16,9 +22,21 @@ TableCompositionGroup::~TableCompositionGroup()
     delete ui;
 }
 
-void TableCompositionGroup::Init(QSqlTableModel *mod)
+void TableCompositionGroup::Update()
 {
-    this->model = mod;
+    model->select();
+}
+
+void TableCompositionGroup::setNGr(const QString & text, const QString & text1)
+{
+    model->setFilter("id_gr=(SELECT gruppa.id_gr FROM gruppa WHERE gruppa.n_gr='"
+                    + text + "') "
+                    "AND semes=" + text1 + ";");
+
+}
+
+void TableCompositionGroup::Init()
+{
     ui->tableView->setModel(model);
     ui->tableView->setColumnHidden(0, true);
     ui->tableView->setColumnHidden(1, true);

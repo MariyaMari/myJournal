@@ -7,6 +7,13 @@ TableMadeWorks::TableMadeWorks(const SettingsPtr &settings, QWidget *parent) :
     m_settings(settings)
 {
     ui->setupUi(this);
+
+    model = new QSqlRelationalTableModel(0, db);
+    model->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
+    model->setTable("link2");
+//    model->setRelation(0, QSqlRelation("students", "id_st", "fio"));
+    model->select();
+    Init();
 }
 
 TableMadeWorks::~TableMadeWorks()
@@ -14,9 +21,21 @@ TableMadeWorks::~TableMadeWorks()
     delete ui;
 }
 
-void TableMadeWorks::Init(QSqlRelationalTableModel *mod)
+void TableMadeWorks::Update()
 {
-    this->model = mod;
+    model->select();
+}
+
+void TableMadeWorks::setNGr(const QString & text, const QString & text1)
+{
+//    model->setFilter("id_spec=(SELECT specialty.id_spec FROM specialty WHERE specialty.n_spec='"
+//                   + text) + "') "
+//                   "AND semes=" + text1) + ";");
+
+}
+
+void TableMadeWorks::Init()
+{
     ui->tableView->setModel(model);
 //    ui->tableView->setColumnHidden(0, true);
 

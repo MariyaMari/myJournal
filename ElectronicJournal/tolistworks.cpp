@@ -34,20 +34,12 @@ void ToListWorks::Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2, QSqlQueryMode
 
 void ToListWorks::on_pushButton_clicked()
 {
-    QSqlRelationalTableModel *mod = new QSqlRelationalTableModel(0, db);
-    mod->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
-    mod->setTable("link1");
-    mod->select();
-    mod->setFilter("id_trab=(SELECT typerabot.id_trab FROM typerabot WHERE typerabot.n_trab='"
-                   + ui->comboBox_4->currentText() + "') "
-                   "AND id_dis=(SELECT disciplina.id_dis FROM disciplina WHERE disciplina.n_dis='"
-                   + ui->comboBox_3->currentText() + "') "
-                   "AND id_spec=(SELECT specialty.id_spec FROM specialty WHERE specialty.n_spec='"
-                   + ui->comboBox_2->currentText() + "') "
-                   "AND semes=" + ui->comboBox->currentText()
-                   + ";");
+    QString text = ui->comboBox_4->currentText();
+    QString text1 = ui->comboBox_3->currentText();
+    QString text2 = ui->comboBox_2->currentText();
+    QString text3 = ui->comboBox->currentText();
 
-    listWorks->Init(mod);
-    //listWorks->show();
+    listWorks->setNGr(text, text1, text2, text3);
+    listWorks->Update();
     emit newWindow(listWorks);
 }

@@ -28,15 +28,11 @@ void ToCompositionGroup::Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2)
 
 void ToCompositionGroup::on_pushButton_clicked()
 {
-    QSqlTableModel *mod = new QSqlTableModel(0, db);
-    mod->setEditStrategy(QSqlTableModel::OnManualSubmit);
-    mod->setTable("sostavgr");
-    mod->select();
-    mod->setFilter("id_gr=(SELECT gruppa.id_gr FROM gruppa WHERE gruppa.n_gr='"
-                    + ui->comboBox_2->currentText() + "') "
-                    "AND semes=" + ui->comboBox->currentText() + ";");
+    QString text = ui->comboBox_2->currentText();
+    QString text1 = ui->comboBox->currentText();
 
-    compGrup->Init(mod);
-    //compGrup->show();
+    compGrup->setNGr(text, text1);
+    compGrup->Update();
     emit newWindow(compGrup);
 }
+

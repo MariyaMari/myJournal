@@ -9,6 +9,13 @@ TableVisit::TableVisit(const SettingsPtr &settings, QWidget *parent) :
     m_settings(settings)
 {
     ui->setupUi(this);
+
+    model = new QSqlRelationalTableModel(0, db);
+    model->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
+    model->setTable("link3");
+//  model->setRelation(0, QSqlRelation("students", "id_st", "fio"));
+    model->select();
+    Init();
 }
 
 TableVisit::~TableVisit()
@@ -16,9 +23,24 @@ TableVisit::~TableVisit()
     delete ui;
 }
 
-void TableVisit::Init(QSqlRelationalTableModel *mod)
+void TableVisit::Update()
 {
-    this->model = mod;
+    model->select();
+}
+
+void TableVisit::setNGr(const QString & text, const QString & text1, const QString & text2)
+{
+    model->setFilter("id_trab=(SELECT typerabot.id_trab FROM typerabot WHERE typerabot.n_trab='"
+                   + text + "') "
+                   "AND id_dis=(SELECT disciplina.id_dis FROM disciplina WHERE disciplina.n_dis='"
+                   + text1 + "') "
+ //                  "AND data=" + text2
+                   + ";");
+
+}
+
+void TableVisit::Init()
+{
     ui->tableView->setModel(model);
 //    ui->tableView->setColumnHidden(1, true);
     ui->tableView->setColumnHidden(2, true);

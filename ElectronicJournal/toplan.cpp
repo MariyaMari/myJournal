@@ -29,24 +29,10 @@ void ToPlan::Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2)
 
 void ToPlan::on_pushButton_clicked()
 {
-    QSqlTableModel *mod = new QSqlTableModel(0, db);
-    mod->setEditStrategy(QSqlTableModel::OnManualSubmit);
-    mod->setTable("plan");
-    mod->select();
-    mod->setFilter("id_spec=(SELECT specialty.id_spec FROM specialty WHERE specialty.n_spec='"
-                    + ui->comboBox_2->currentText() + "') "
-                    "AND semes=" + ui->comboBox->currentText()
- //                  + "AND id_dis=(SELECT disciplina.n_dis FROM disciplina WHERE plan.id_dis=disciplina.id_dis)"
-                    + ";");
+    QString text = ui->comboBox_2->currentText();
+    QString text1 = ui->comboBox->currentText();
 
- /*   QSqlQueryModel *potModel = new QSqlQueryModel();
-    potModel->setQuery("select id_dis from disciplina where n_dis = '" + ui->comboBox->currentText() + "';");
-
-    QString pot = potModel->record(0).field(0).value().toString();
-
-    mod->setFilter("id_dis=" + pot);*/
-
-    plan->Init(mod);
-    //plan->show();
+    plan->setNGr(text, text1);
+    plan->Update();
     emit newWindow(plan);
 }

@@ -34,16 +34,10 @@ void ToMadeWorks::Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2, QSqlQueryMode
 
 void ToMadeWorks::on_pushButton_clicked()
 {
-    QSqlRelationalTableModel *mod = new QSqlRelationalTableModel(0, db);
-    mod->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
-    mod->setTable("link2");
-//    mod->setRelation(0, QSqlRelation("students", "id_st", "fio"));
-    mod->select();
-//    mod->setFilter("id_spec=(SELECT specialty.id_spec FROM specialty WHERE specialty.n_spec='"
-//                   + ui->comboBox_2->currentText() + "') "
-//                   "AND semes=" + ui->comboBox->currentText() + ";");
+    QString text = ui->comboBox_2->currentText();
+    QString text1 = ui->comboBox->currentText();
 
-    madeWorks->Init(mod);
-    //madeWorks->show();
+    madeWorks->setNGr(text, text1);
+    madeWorks->Update();
     emit newWindow(madeWorks);
 }

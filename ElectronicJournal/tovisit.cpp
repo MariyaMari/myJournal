@@ -31,19 +31,11 @@ void ToVisit::Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2, QSqlQueryModel *m
 
 void ToVisit::on_pushButton_clicked()
 {
-    QSqlRelationalTableModel *mod = new QSqlRelationalTableModel(0, db);
-    mod->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
-    mod->setTable("link3");
-//    mod->setRelation(0, QSqlRelation("students", "id_st", "fio"));
-    mod->select();
-    mod->setFilter("id_trab=(SELECT typerabot.id_trab FROM typerabot WHERE typerabot.n_trab='"
-                   + ui->comboBox_3->currentText() + "') "
-                   "AND id_dis=(SELECT disciplina.id_dis FROM disciplina WHERE disciplina.n_dis='"
-                   + ui->comboBox_2->currentText() + "') "
- //                  "AND data=" + ui->comboBox->currentText()
-                   + ";");
+    QString text = ui->comboBox_3->currentText();
+    QString text1 = ui->comboBox_2->currentText();
+    QString text2 = ui->comboBox->currentText();
 
-    visit->Init(mod);
-    //visit->show();
+    visit->setNGr(text, text1, text2);
+    visit->Update();
     emit newWindow(visit);
 }

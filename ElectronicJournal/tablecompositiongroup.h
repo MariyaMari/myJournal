@@ -20,7 +20,9 @@ public:
     QSqlDatabase db;
     QSqlTableModel *model;
 
-    void Init(QSqlTableModel *mod);
+    void Init();
+    void Update();
+    void setNGr(const QString & text, const QString &text1);
 
 private slots:
     void on_pushButton_clicked();

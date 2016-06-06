@@ -9,6 +9,12 @@ TablePlan::TablePlan(const SettingsPtr &settings, QWidget *parent) :
     m_settings(settings)
 {
     ui->setupUi(this);
+
+    model = new QSqlTableModel(0, db);
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setTable("plan");
+    model->select();
+    Init();
 }
 
 TablePlan::~TablePlan()
@@ -16,9 +22,23 @@ TablePlan::~TablePlan()
     delete ui;
 }
 
-void TablePlan::Init(QSqlTableModel *mod)
+void TablePlan::Update()
 {
-    this->model = mod;
+    model->select();
+}
+
+void TablePlan::setNGr(const QString & text, const QString & text1)
+{
+    model->setFilter("id_spec=(SELECT specialty.id_spec FROM specialty WHERE specialty.n_spec='"
+                    + text + "') "
+                    "AND semes=" + text1
+ //                  + "AND id_dis=(SELECT disciplina.n_dis FROM disciplina WHERE plan.id_dis=disciplina.id_dis)"
+                    + ";");
+
+}
+
+void TablePlan::Init()
+{
     ui->tableView->setModel(model);
     ui->tableView->setColumnHidden(0, true);
     ui->tableView->setColumnHidden(2, true);
