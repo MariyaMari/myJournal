@@ -30,10 +30,6 @@ void AddSpecialty::on_pushButton_clicked()
         return;
     }
 
-    modFac = new QSqlQueryModel();
-    modFac->setQuery("select n_spec from specialty;");
-    ui->comboBox->setModel(modFac);
-
     QSqlQueryModel *potModel = new QSqlQueryModel();
     potModel->setQuery("select id_fac from facultet where n_fac = '" + ui->comboBox->currentText() + "';");
 

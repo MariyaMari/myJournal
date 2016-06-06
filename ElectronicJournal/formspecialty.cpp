@@ -55,7 +55,7 @@ void FormSpecialty::on_pushButton_clicked() //Удалить
 void FormSpecialty::on_pushButton_2_clicked() //Добавить
 {
     QSqlQueryModel *mod = new QSqlQueryModel();
-    mod->setQuery("select * from facultet;");
+    mod->setQuery("select n_fac from facultet;");
 
     addSpec->Init(mod, db);
     //addSpec->show();

@@ -56,7 +56,7 @@ void FormGroup::on_pushButton_clicked() //Удалить
 void FormGroup::on_pushButton_2_clicked() //Добавить
 {
     QSqlQueryModel *mod = new QSqlQueryModel();
-    mod->setQuery("select * from specialty;");
+    mod->setQuery("select n_spec from specialty;");
 
     addGrup->Init(mod, db);
     //addGrup->show();
