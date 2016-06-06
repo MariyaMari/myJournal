@@ -10,9 +10,10 @@ TablePlan::TablePlan(const SettingsPtr &settings, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    model = new QSqlTableModel(0, db);
-    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model = new QSqlRelationalTableModel(0, db);
+    model->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
     model->setTable("plan");
+    model->setRelation(1, QSqlRelation("disciplina", "id_dis", "n_dis"));
     model->select();
     Init();
 }
@@ -32,7 +33,6 @@ void TablePlan::setNGr(const QString & text, const QString & text1)
     model->setFilter("id_spec=(SELECT specialty.id_spec FROM specialty WHERE specialty.n_spec='"
                     + text + "') "
                     "AND semes=" + text1
- //                  + "AND id_dis=(SELECT disciplina.n_dis FROM disciplina WHERE plan.id_dis=disciplina.id_dis)"
                     + ";");
 
 }
