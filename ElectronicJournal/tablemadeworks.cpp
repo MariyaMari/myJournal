@@ -25,9 +25,10 @@ void TableMadeWorks::update()
     model.select();
 }
 
-void TableMadeWorks::setFilter(const QString & n_gr, const QString & n_dis, const QString & n_trab)
+void TableMadeWorks::setFilter(const QString & n_gr, const QString & n_dis, const QString & n_trab, const QString &data)
 {
-
+    viewModel1.setFilterKeyColumn(0);
+    viewModel1.setFilterFixedString(data);
 
 }
 

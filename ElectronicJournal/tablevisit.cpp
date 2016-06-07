@@ -27,7 +27,7 @@ void TableVisit::update()
     model.select();
 }
 
-void TableVisit::setFilter(const QString & n_trab, const QString & n_dis)
+void TableVisit::setFilter(const QString & n_trab, const QString & n_dis, const QString &data)
 {
     QSqlQuery query( "SELECT id_trab FROM typerabot WHERE n_trab='" + n_trab + "'" );
     QString id_trab;
@@ -47,21 +47,16 @@ void TableVisit::setFilter(const QString & n_trab, const QString & n_dis)
     viewModel2.setFilterKeyColumn(4);
     viewModel2.setFilterFixedString(id_dis);
 
-
-//    model->setFilter("id_trab=(SELECT typerabot.id_trab FROM typerabot WHERE typerabot.n_trab='"
-//                   + text + "') "
-//                   "AND id_dis=(SELECT disciplina.id_dis FROM disciplina WHERE disciplina.n_dis='"
-//                   + text1 + "') "
-// //                  "AND data=" + text2
-//                   + ";");
-
+    viewModel3.setFilterKeyColumn(1);
+    viewModel3.setFilterFixedString(data);
 }
 
 void TableVisit::Init()
 {
     viewModel1.setSourceModel(&model);
     viewModel2.setSourceModel(&viewModel1);
-    ui->tableView->setModel(&viewModel2);
+    viewModel3.setSourceModel(&viewModel2);
+    ui->tableView->setModel(&viewModel3);
 //    ui->tableView->setColumnHidden(1, true);
     ui->tableView->setColumnHidden(2, true);
     ui->tableView->setColumnHidden(4, true);

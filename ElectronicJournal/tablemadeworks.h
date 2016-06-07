@@ -18,11 +18,11 @@ public:
     ~TableMadeWorks();
 
     QSqlRelationalTableModel model;
-    QSortFilterProxyModel viewModel1, viewModel2;
+    QSortFilterProxyModel viewModel1, viewModel2, viewModel3, viewModel4;
 
     void Init();
     void update();
-    void setFilter(const QString & n_gr, const QString & n_dis, const QString &n_trab);
+    void setFilter(const QString & n_gr, const QString & n_dis, const QString &n_trab, const QString &data);
 
 private:
     Ui::TableMadeWorks *ui;

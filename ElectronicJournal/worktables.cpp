@@ -39,13 +39,12 @@ WorkTables::~WorkTables()
 void WorkTables::on_pushButton_clicked()
 {
     QSqlQueryModel *mod1 = new QSqlQueryModel();
-    mod1->setQuery("select semes from plan;");
+    mod1->setQuery("select semes from plan GROUP BY semes;");
 
     QSqlQueryModel *mod2 = new QSqlQueryModel();
     mod2->setQuery("select n_spec from specialty;");
 
     toPlan->Init(mod1, mod2);
-    //toPlan->show();
 
     emit newWindow(toPlan);
 }
@@ -53,13 +52,12 @@ void WorkTables::on_pushButton_clicked()
 void WorkTables::on_pushButton_2_clicked()
 {
     QSqlQueryModel *mod1 = new QSqlQueryModel();
-    mod1->setQuery("select semes from sostavgr;");
+    mod1->setQuery("select semes from sostavgr GROUP BY semes;");
 
     QSqlQueryModel *mod2 = new QSqlQueryModel();
     mod2->setQuery("select n_gr from gruppa;");
 
     toCompGroup->Init(mod1, mod2);
-    //toCompGroup->show();
 
     emit newWindow(toCompGroup);
 }
@@ -67,7 +65,7 @@ void WorkTables::on_pushButton_2_clicked()
 void WorkTables::on_pushButton_3_clicked()
 {
     QSqlQueryModel *mod1 = new QSqlQueryModel();
-    mod1->setQuery("select data from link3;");
+    mod1->setQuery("select data from link3 GROUP BY data;");
 
     QSqlQueryModel *mod2 = new QSqlQueryModel();
     mod2->setQuery("select n_dis from disciplina;");
@@ -76,7 +74,6 @@ void WorkTables::on_pushButton_3_clicked()
     mod3->setQuery("select n_trab from typerabot;");
 
     toVisit->Init(mod1, mod2, mod3);
-    //toVisit->show();
 
     emit newWindow(toVisit);
 }
@@ -84,7 +81,7 @@ void WorkTables::on_pushButton_3_clicked()
 void WorkTables::on_pushButton_4_clicked()
 {
     QSqlQueryModel *mod1 = new QSqlQueryModel();
-    mod1->setQuery("select semes from link1;");
+    mod1->setQuery("select semes from link1 GROUP BY semes;");
 
     QSqlQueryModel *mod2 = new QSqlQueryModel();
     mod2->setQuery("select n_spec from specialty;");
@@ -96,7 +93,6 @@ void WorkTables::on_pushButton_4_clicked()
     mod4->setQuery("select n_trab from typerabot;");
 
     tolistWorks->Init(mod1, mod2, mod3, mod4);
-    //tolistWorks->show();
 
     emit newWindow(tolistWorks);
 }
@@ -104,7 +100,7 @@ void WorkTables::on_pushButton_4_clicked()
 void WorkTables::on_pushButton_5_clicked()
 {
     QSqlQueryModel *mod1 = new QSqlQueryModel();
-    mod1->setQuery("select data from link2;");
+    mod1->setQuery("select data from link2 GROUP BY data;");
 
     QSqlQueryModel *mod2 = new QSqlQueryModel();
     mod2->setQuery("select n_gr from gruppa;");
@@ -116,7 +112,6 @@ void WorkTables::on_pushButton_5_clicked()
     mod4->setQuery("select n_trab from typerabot;");
 
     toMadeWorks->Init(mod1, mod2, mod3, mod4);
-    //toMadeWorks->show();
 
     emit newWindow(toMadeWorks);
 }

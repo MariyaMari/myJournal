@@ -40,7 +40,7 @@ void ToMadeWorks::on_pushButton_clicked()
     QString n_trab = ui->comboBox_4->currentText();
 
     madeWorks->update();
-    madeWorks->setFilter(n_gr, n_dis, n_trab);
+    madeWorks->setFilter(n_gr, n_dis, n_trab, data);
 
     emit newWindow(madeWorks);
 }

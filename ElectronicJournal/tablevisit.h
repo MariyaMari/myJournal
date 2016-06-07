@@ -18,11 +18,11 @@ public:
     ~TableVisit();
 
     QSqlRelationalTableModel model;
-    QSortFilterProxyModel viewModel1, viewModel2;
+    QSortFilterProxyModel viewModel1, viewModel2, viewModel3;
 
     void Init();
     void update();
-    void setFilter(const QString & n_trab, const QString & n_dis);
+    void setFilter(const QString & n_trab, const QString & n_dis, const QString & data);
 
 private slots:
     void on_pushButton_clicked();
