@@ -32,7 +32,8 @@ void ToPlan::on_pushButton_clicked()
     QString text = ui->comboBox_2->currentText();
     QString text1 = ui->comboBox->currentText();
 
-    plan->setNGr(text, text1);
+
     plan->Update();
+    plan->setNGr(text, text1);
     emit newWindow(plan);
 }

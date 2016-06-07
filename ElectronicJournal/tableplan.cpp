@@ -13,7 +13,7 @@ TablePlan::TablePlan(const SettingsPtr &settings, QWidget *parent) :
     model = new QSqlRelationalTableModel(0, db);
     model->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
     model->setTable("plan");
-    model->setRelation(1, QSqlRelation("disciplina", "id_dis", "n_dis"));
+//    model->setRelation(1, QSqlRelation("disciplina", "id_dis", "n_dis"));
     model->select();
     Init();
 }
@@ -26,6 +26,7 @@ TablePlan::~TablePlan()
 void TablePlan::Update()
 {
     model->select();
+    model->setRelation(1, QSqlRelation("disciplina", "id_dis", "n_dis"));
 }
 
 void TablePlan::setNGr(const QString & text, const QString & text1)

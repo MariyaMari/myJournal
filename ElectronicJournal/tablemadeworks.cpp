@@ -11,7 +11,7 @@ TableMadeWorks::TableMadeWorks(const SettingsPtr &settings, QWidget *parent) :
     model = new QSqlRelationalTableModel(0, db);
     model->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
     model->setTable("link2");
-//    model->setRelation(0, QSqlRelation("students", "id_st", "fio"));
+    model->setRelation(1, QSqlRelation("students", "id_st", "fio"));
     model->select();
     Init();
 }

@@ -17,8 +17,8 @@ FormDiscipline::FormDiscipline(const SettingsPtr &settings, QWidget *parent) :
     Init();
 
 
-    QIcon remove("remove.png"); //Иконки на кнопки
-    ui->pushButton->setIcon(remove);
+//    QIcon remove("remove.png"); //Иконки на кнопки
+//    ui->pushButton->setIcon(remove);
 }
 
 FormDiscipline::~FormDiscipline()

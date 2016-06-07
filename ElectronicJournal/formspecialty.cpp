@@ -36,6 +36,7 @@ void FormSpecialty::Update()
 void FormSpecialty::Init()
 {
     ui->tableView->setModel(model);
+    ui->tableView->setItemDelegate(new QSqlRelationalDelegate(ui->tableView));
     ui->tableView->setColumnHidden(0, true);
     ui->tableView->show();
     model->setHeaderData(1, Qt::Horizontal, "Название Специальности");

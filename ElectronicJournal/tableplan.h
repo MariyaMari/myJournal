@@ -18,7 +18,7 @@ public:
     ~TablePlan();
 
     QSqlDatabase db;
-    QSqlTableModel *model;
+    QSqlRelationalTableModel *model;
 
     void Init();
     void Update();

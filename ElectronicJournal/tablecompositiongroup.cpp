@@ -10,9 +10,10 @@ TableCompositionGroup::TableCompositionGroup(const SettingsPtr &settings, QWidge
 {
     ui->setupUi(this);
 
-    model = new QSqlTableModel(0, db);
-    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model = new QSqlRelationalTableModel(0, db);
+    model->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
     model->setTable("sostavgr");
+    model->setRelation(2, QSqlRelation("students", "id_st", "fio"));
     model->select();
     Init();
 }
@@ -29,9 +30,9 @@ void TableCompositionGroup::Update()
 
 void TableCompositionGroup::setNGr(const QString & text, const QString & text1)
 {
-    model->setFilter("id_gr=(SELECT gruppa.id_gr FROM gruppa WHERE gruppa.n_gr='"
-                    + text + "') "
-                    "AND semes=" + text1 + ";");
+//    model->setFilter("id_gr=(SELECT gruppa.id_gr FROM gruppa WHERE gruppa.n_gr='"
+//                    + text + "') "
+//                    "AND semes=" + text1 + ";");
 
 }
 
