@@ -6,15 +6,16 @@
 TablePlan::TablePlan(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TablePlan),
+    model( this ),
     m_settings(settings)
 {
     ui->setupUi(this);
 
-    model = new QSqlRelationalTableModel(0, db);
-    model->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
-    model->setTable("plan");
-//    model->setRelation(1, QSqlRelation("disciplina", "id_dis", "n_dis"));
-    model->select();
+    model.setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
+    model.setTable("plan");
+    model.setRelation( 1, QSqlRelation( "disciplina", "id_dis", "n_dis" ) );
+    update();
+
     Init();
 }
 
@@ -23,28 +24,35 @@ TablePlan::~TablePlan()
     delete ui;
 }
 
-void TablePlan::Update()
+void    TablePlan::update()
 {
-    model->select();
-    model->setRelation(1, QSqlRelation("disciplina", "id_dis", "n_dis"));
+    model.select();
 }
 
-void TablePlan::setNGr(const QString & text, const QString & text1)
+void    TablePlan::setFilter( const QString & n_spec, const QString & semes )
 {
-    model->setFilter("id_spec=(SELECT specialty.id_spec FROM specialty WHERE specialty.n_spec='"
-                    + text + "') "
-                    "AND semes=" + text1
-                    + ";");
+    viewModel1.setFilterKeyColumn( 2 );
+    viewModel1.setFilterFixedString( semes );
 
+    QSqlQuery query( "SELECT id_spec FROM specialty WHERE n_spec='" + n_spec + "'" );
+    QString id_spec;
+    while( query.next() )
+    {
+        id_spec = query.value( 0 ).toString();
+    }
+    viewModel2.setFilterKeyColumn( 0 );
+    viewModel2.setFilterFixedString( id_spec );
 }
 
 void TablePlan::Init()
 {
-    ui->tableView->setModel(model);
+    viewModel1.setSourceModel( &model );
+    viewModel2.setSourceModel( &viewModel1 );
+    ui->tableView->setModel( &viewModel2 );
     ui->tableView->setColumnHidden(0, true);
     ui->tableView->setColumnHidden(2, true);
     ui->tableView->show();
-    model->setHeaderData(1, Qt::Horizontal, "Название Дисциплины");
+    model.setHeaderData(1, Qt::Horizontal, "Название Дисциплины");
 
     QHeaderView *pHW = ui->tableView->horizontalHeader(); //Нормальный размер колонок
     int count = pHW->count();
@@ -54,7 +62,7 @@ void TablePlan::Init()
 
 void TablePlan::on_pushButton_clicked() //Удалить
 {
-    model->removeRow(ui->tableView->currentIndex().row());
+    model.removeRow(ui->tableView->currentIndex().row());
 }
 
 void TablePlan::on_pushButton_2_clicked() //Добавить
@@ -64,7 +72,7 @@ void TablePlan::on_pushButton_2_clicked() //Добавить
 
 void TablePlan::on_pushButton_3_clicked() //Подтвердить
 {
-    if(!model->submitAll())
-        QMessageBox::warning(this, "Error", model->lastError().text());
-    model->select();
+    if(!model.submitAll())
+        QMessageBox::warning(this, "Error", model.lastError().text());
+    model.select();
 }

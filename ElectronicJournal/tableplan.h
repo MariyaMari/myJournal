@@ -17,12 +17,12 @@ public:
     explicit TablePlan(const SettingsPtr & settings, QWidget *parent = 0);
     ~TablePlan();
 
-    QSqlDatabase db;
-    QSqlRelationalTableModel *model;
+    QSqlRelationalTableModel model;
+    QSortFilterProxyModel viewModel1, viewModel2;
 
-    void Init();
-    void Update();
-    void setNGr(const QString & text, const QString &text1);
+    void    Init();
+    void    update();
+    void    setFilter(const QString & n_spec, const QString & semes );
 
 private slots:
     void on_pushButton_clicked();

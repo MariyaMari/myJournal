@@ -27,13 +27,13 @@ void ToPlan::Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2)
     ui->comboBox_2->setModel(mod2);
 }
 
-void ToPlan::on_pushButton_clicked()
+void    ToPlan::on_pushButton_clicked()
 {
-    QString text = ui->comboBox_2->currentText();
-    QString text1 = ui->comboBox->currentText();
+    QString semes = ui->comboBox->currentText();
+    QString n_spec = ui->comboBox_2->currentText();
 
+    plan->setFilter( n_spec, semes );
+    plan->update();
 
-    plan->Update();
-    plan->setNGr(text, text1);
-    emit newWindow(plan);
+    emit newWindow( plan );
 }
