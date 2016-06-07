@@ -17,12 +17,12 @@ public:
     explicit TableMadeWorks(const SettingsPtr & settings, QWidget *parent = 0);
     ~TableMadeWorks();
 
-    QSqlDatabase db;
-    QSqlRelationalTableModel *model;
+    QSqlRelationalTableModel model;
+    QSortFilterProxyModel viewModel1, viewModel2;
 
     void Init();
-    void Update();
-    void setNGr(const QString & text, const QString &text1);
+    void update();
+    void setFilter(const QString & n_gr, const QString & n_dis, const QString &n_trab);
 
 private:
     Ui::TableMadeWorks *ui;

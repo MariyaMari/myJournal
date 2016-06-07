@@ -34,10 +34,13 @@ void ToMadeWorks::Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2, QSqlQueryMode
 
 void ToMadeWorks::on_pushButton_clicked()
 {
-    QString text = ui->comboBox_2->currentText();
-    QString text1 = ui->comboBox->currentText();
+    QString data = ui->comboBox->currentText();
+    QString n_gr = ui->comboBox_2->currentText();
+    QString n_dis = ui->comboBox_3->currentText();
+    QString n_trab = ui->comboBox_4->currentText();
 
-    madeWorks->setNGr(text, text1);
-    madeWorks->Update();
+    madeWorks->update();
+    madeWorks->setFilter(n_gr, n_dis, n_trab);
+
     emit newWindow(madeWorks);
 }

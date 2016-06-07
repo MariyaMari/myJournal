@@ -20,9 +20,9 @@ public:
     QSqlRelationalTableModel model;
     QSortFilterProxyModel viewModel1, viewModel2;
 
-    void    Init();
-    void    update();
-    void    setFilter(const QString & n_spec, const QString & semes );
+    void Init();
+    void update();
+    void setFilter(const QString & n_spec, const QString & semes);
 
 private slots:
     void on_pushButton_clicked();

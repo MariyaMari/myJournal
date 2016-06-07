@@ -8,11 +8,10 @@ TableMadeWorks::TableMadeWorks(const SettingsPtr &settings, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    model = new QSqlRelationalTableModel(0, db);
-    model->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
-    model->setTable("link2");
-    model->setRelation(1, QSqlRelation("students", "id_st", "fio"));
-    model->select();
+    model.setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
+    model.setTable("link2");
+    model.setRelation(1, QSqlRelation("students", "id_st", "fio"));
+    update();
     Init();
 }
 
@@ -21,26 +20,26 @@ TableMadeWorks::~TableMadeWorks()
     delete ui;
 }
 
-void TableMadeWorks::Update()
+void TableMadeWorks::update()
 {
-    model->select();
+    model.select();
 }
 
-void TableMadeWorks::setNGr(const QString & text, const QString & text1)
+void TableMadeWorks::setFilter(const QString & n_gr, const QString & n_dis, const QString & n_trab)
 {
-//    model->setFilter("id_spec=(SELECT specialty.id_spec FROM specialty WHERE specialty.n_spec='"
-//                   + text) + "') "
-//                   "AND semes=" + text1) + ";");
+
 
 }
 
 void TableMadeWorks::Init()
 {
-    ui->tableView->setModel(model);
+    viewModel1.setSourceModel(&model);
+    viewModel2.setSourceModel(&viewModel1);
+    ui->tableView->setModel(&viewModel2);
 //    ui->tableView->setColumnHidden(0, true);
 
     ui->tableView->show();
-    model->setHeaderData(1, Qt::Horizontal, "ФИО Студента");
+    model.setHeaderData(1, Qt::Horizontal, "ФИО Студента");
 
     QHeaderView *pHW = ui->tableView->horizontalHeader(); //Нормальный размер колонок
     int count = pHW->count();

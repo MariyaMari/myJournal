@@ -31,11 +31,12 @@ void ToVisit::Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2, QSqlQueryModel *m
 
 void ToVisit::on_pushButton_clicked()
 {
-    QString text = ui->comboBox_3->currentText();
-    QString text1 = ui->comboBox_2->currentText();
-    QString text2 = ui->comboBox->currentText();
+    QString data = ui->comboBox->currentText();
+    QString n_dis = ui->comboBox_2->currentText();
+    QString n_trab = ui->comboBox_3->currentText();
 
-    visit->setNGr(text, text1, text2);
-    visit->Update();
+    visit->update();
+    visit->setFilter(n_trab, n_dis);
+
     emit newWindow(visit);
 }

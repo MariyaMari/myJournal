@@ -10,11 +10,10 @@ TableVisit::TableVisit(const SettingsPtr &settings, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    model = new QSqlRelationalTableModel(0, db);
-    model->setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
-    model->setTable("link3");
-    model->setRelation(0, QSqlRelation("students", "id_st", "fio"));
-    model->select();
+    model.setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
+    model.setTable("link3");
+    model.setRelation(0, QSqlRelation("students", "id_st", "fio"));
+    update();
     Init();
 }
 
@@ -23,31 +22,52 @@ TableVisit::~TableVisit()
     delete ui;
 }
 
-void TableVisit::Update()
+void TableVisit::update()
 {
-    model->select();
+    model.select();
 }
 
-void TableVisit::setNGr(const QString & text, const QString & text1, const QString & text2)
+void TableVisit::setFilter(const QString & n_trab, const QString & n_dis)
 {
-    model->setFilter("id_trab=(SELECT typerabot.id_trab FROM typerabot WHERE typerabot.n_trab='"
-                   + text + "') "
-                   "AND id_dis=(SELECT disciplina.id_dis FROM disciplina WHERE disciplina.n_dis='"
-                   + text1 + "') "
- //                  "AND data=" + text2
-                   + ";");
+    QSqlQuery query( "SELECT id_trab FROM typerabot WHERE n_trab='" + n_trab + "'" );
+    QString id_trab;
+    while(query.next())
+    {
+        id_trab = query.value(0).toString();
+    }
+    viewModel1.setFilterKeyColumn(2);
+    viewModel1.setFilterFixedString(id_trab);
+
+    QSqlQuery query1( "SELECT id_dis FROM disciplina WHERE n_dis='" + n_dis + "'" );
+    QString id_dis;
+    while(query1.next())
+    {
+        id_dis = query1.value(0).toString();
+    }
+    viewModel2.setFilterKeyColumn(4);
+    viewModel2.setFilterFixedString(id_dis);
+
+
+//    model->setFilter("id_trab=(SELECT typerabot.id_trab FROM typerabot WHERE typerabot.n_trab='"
+//                   + text + "') "
+//                   "AND id_dis=(SELECT disciplina.id_dis FROM disciplina WHERE disciplina.n_dis='"
+//                   + text1 + "') "
+// //                  "AND data=" + text2
+//                   + ";");
 
 }
 
 void TableVisit::Init()
 {
-    ui->tableView->setModel(model);
+    viewModel1.setSourceModel(&model);
+    viewModel2.setSourceModel(&viewModel1);
+    ui->tableView->setModel(&viewModel2);
 //    ui->tableView->setColumnHidden(1, true);
     ui->tableView->setColumnHidden(2, true);
     ui->tableView->setColumnHidden(4, true);
     ui->tableView->show();
-    model->setHeaderData(0, Qt::Horizontal, "ФИО Студента");
-    model->setHeaderData(3, Qt::Horizontal, "Пропуск");
+    model.setHeaderData(0, Qt::Horizontal, "ФИО Студента");
+    model.setHeaderData(3, Qt::Horizontal, "Пропуск");
 
     QHeaderView *pHW = ui->tableView->horizontalHeader(); //Нормальный размер колонок
     int count = pHW->count();
@@ -58,7 +78,7 @@ void TableVisit::Init()
 
 void TableVisit::on_pushButton_clicked() //Удалить
 {
-    model->removeRow(ui->tableView->currentIndex().row());
+    model.removeRow(ui->tableView->currentIndex().row());
 }
 
 void TableVisit::on_pushButton_2_clicked() //Добавить
@@ -68,7 +88,7 @@ void TableVisit::on_pushButton_2_clicked() //Добавить
 
 void TableVisit::on_pushButton_3_clicked() //Подтвердить
 {
-    if(!model->submitAll())
-        QMessageBox::warning(this, "Error", model->lastError().text());
-    model->select();
+    if(!model.submitAll())
+        QMessageBox::warning(this, "Error", model.lastError().text());
+    update();
 }

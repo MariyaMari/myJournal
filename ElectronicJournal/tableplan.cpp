@@ -6,16 +6,14 @@
 TablePlan::TablePlan(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TablePlan),
-    model( this ),
     m_settings(settings)
 {
     ui->setupUi(this);
 
     model.setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
     model.setTable("plan");
-    model.setRelation( 1, QSqlRelation( "disciplina", "id_dis", "n_dis" ) );
+    model.setRelation(1, QSqlRelation("disciplina", "id_dis", "n_dis"));
     update();
-
     Init();
 }
 
@@ -24,31 +22,31 @@ TablePlan::~TablePlan()
     delete ui;
 }
 
-void    TablePlan::update()
+void TablePlan::update()
 {
     model.select();
 }
 
-void    TablePlan::setFilter( const QString & n_spec, const QString & semes )
+void TablePlan::setFilter(const QString & n_spec, const QString & semes)
 {
-    viewModel1.setFilterKeyColumn( 2 );
-    viewModel1.setFilterFixedString( semes );
+    viewModel1.setFilterKeyColumn(2);
+    viewModel1.setFilterFixedString(semes);
 
     QSqlQuery query( "SELECT id_spec FROM specialty WHERE n_spec='" + n_spec + "'" );
     QString id_spec;
-    while( query.next() )
+    while(query.next())
     {
-        id_spec = query.value( 0 ).toString();
+        id_spec = query.value(0).toString();
     }
-    viewModel2.setFilterKeyColumn( 0 );
-    viewModel2.setFilterFixedString( id_spec );
+    viewModel2.setFilterKeyColumn(0);
+    viewModel2.setFilterFixedString(id_spec);
 }
 
 void TablePlan::Init()
 {
-    viewModel1.setSourceModel( &model );
-    viewModel2.setSourceModel( &viewModel1 );
-    ui->tableView->setModel( &viewModel2 );
+    viewModel1.setSourceModel(&model);
+    viewModel2.setSourceModel(&viewModel1);
+    ui->tableView->setModel(&viewModel2);
     ui->tableView->setColumnHidden(0, true);
     ui->tableView->setColumnHidden(2, true);
     ui->tableView->show();
@@ -74,5 +72,5 @@ void TablePlan::on_pushButton_3_clicked() //Подтвердить
 {
     if(!model.submitAll())
         QMessageBox::warning(this, "Error", model.lastError().text());
-    model.select();
+    update();
 }

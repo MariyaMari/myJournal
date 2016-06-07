@@ -28,11 +28,12 @@ void ToCompositionGroup::Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2)
 
 void ToCompositionGroup::on_pushButton_clicked()
 {
-    QString text = ui->comboBox_2->currentText();
-    QString text1 = ui->comboBox->currentText();
+    QString semes = ui->comboBox->currentText();
+    QString n_gr = ui->comboBox_2->currentText();
 
-    compGrup->setNGr(text, text1);
-    compGrup->Update();
+    compGrup->update();
+    compGrup->setFilter(semes, n_gr);
+
     emit newWindow(compGrup);
 }
 

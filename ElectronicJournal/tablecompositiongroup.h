@@ -17,12 +17,12 @@ public:
     explicit TableCompositionGroup(const SettingsPtr & settings, QWidget *parent = 0);
     ~TableCompositionGroup();
 
-    QSqlDatabase db;
-    QSqlRelationalTableModel *model;
+    QSqlRelationalTableModel model;
+    QSortFilterProxyModel viewModel1, viewModel2;
 
     void Init();
-    void Update();
-    void setNGr(const QString & text, const QString &text1);
+    void update();
+    void setFilter(const QString & semes, const QString & n_gr);
 
 private slots:
     void on_pushButton_clicked();
