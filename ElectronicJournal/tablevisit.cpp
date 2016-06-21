@@ -2,6 +2,7 @@
 #include "ui_tablevisit.h"
 
 #include <QMessageBox>
+#include <QDebug>
 
 TableVisit::TableVisit(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
@@ -9,6 +10,8 @@ TableVisit::TableVisit(const SettingsPtr &settings, QWidget *parent) :
     m_settings(settings)
 {
     ui->setupUi(this);
+
+    numberPropusk = "0";
 
     model.setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
     model.setTable("link3");
@@ -27,7 +30,7 @@ void TableVisit::update()
     model.select();
 }
 
-void TableVisit::setFilter(const QString & n_trab, const QString & n_dis, const QString &data)
+void TableVisit::setFilter(const QString & n_trab, const QString & n_dis, const QString &data, const QString & n_gr)
 {
     QSqlQuery query( "SELECT id_trab FROM typerabot WHERE n_trab='" + n_trab + "'" );
     QString id_trab;
@@ -49,6 +52,11 @@ void TableVisit::setFilter(const QString & n_trab, const QString & n_dis, const 
 
     viewModel3.setFilterKeyColumn(1);
     viewModel3.setFilterFixedString(data);
+
+    this->data = data;
+    idDis = id_dis;
+    idTrab = id_trab;
+
 }
 
 void TableVisit::Init()
@@ -57,7 +65,7 @@ void TableVisit::Init()
     viewModel2.setSourceModel(&viewModel1);
     viewModel3.setSourceModel(&viewModel2);
     ui->tableView->setModel(&viewModel3);
-//    ui->tableView->setColumnHidden(1, true);
+    ui->tableView->setColumnHidden(1, true);
     ui->tableView->setColumnHidden(2, true);
     ui->tableView->setColumnHidden(4, true);
     ui->tableView->show();
@@ -71,19 +79,38 @@ void TableVisit::Init()
 
 }
 
-void TableVisit::on_pushButton_clicked() //Удалить
+void TableVisit::on_pushButton_2_clicked()
 {
-    model.removeRow(ui->tableView->currentIndex().row());
+    numberPropusk = "0";
 }
 
-void TableVisit::on_pushButton_2_clicked() //Добавить
+void TableVisit::on_pushButton_clicked()
 {
-
+    numberPropusk = "1";
 }
 
-void TableVisit::on_pushButton_3_clicked() //Подтвердить
+void TableVisit::on_pushButton_4_clicked()
 {
+    numberPropusk = "2";
+}
+
+void TableVisit::on_tableView_clicked(const QModelIndex &index)
+{
+    QString FIO = model.record(index.row()).value(0).toString();
+
+    QSqlQuery query( "SELECT id_st FROM students WHERE fio='" + FIO + "'" );
+    while(query.next())
+    {
+        idSt = query.value(0).toString();
+    }
+
+    QSqlQuery query1( "UPDATE link3 SET otm='" + numberPropusk + "' WHERE id_st='" + idSt
+                      + "' AND data='" + data + "' AND id_trab='" + idTrab + "' AND id_dis='" + idDis + "'" );
+    query1.exec();
+
     if(!model.submitAll())
         QMessageBox::warning(this, "Error", model.lastError().text());
     update();
+
+    //qDebug()<<idSt<<" "<<data<<" "<<idTrab<<" "<<idDis<<endl;
 }

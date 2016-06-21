@@ -22,18 +22,21 @@ public:
 
     void Init();
     void update();
-    void setFilter(const QString & n_trab, const QString & n_dis, const QString & data);
+    void setFilter(const QString & n_trab, const QString & n_dis, const QString & data, const QString &n_gr);
 
 private slots:
-    void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
 
-    void on_pushButton_3_clicked();
+    void on_pushButton_clicked();
+
+    void on_pushButton_4_clicked();
+
+    void on_tableView_clicked(const QModelIndex &index);
 
 private:
     Ui::TableVisit *ui;
-
+    QString idSt,idTrab,idDis,numberPropusk,data;
     SettingsPtr m_settings;
 };
 
