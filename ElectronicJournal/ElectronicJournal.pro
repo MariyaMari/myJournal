@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql widgets printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,6 +13,12 @@ QMAKE_CXXFLAGS += -std=c++11
 
 TARGET = ElectronicJournal
 TEMPLATE = app
+
+CONFIG += release c++11
+INCLUDEPATH += ../ImportExport
+LIBPATH     += ../ImportExport
+LIBS   += -L../../ImportExport
+LIBS   += -lImportExport
 
 deployment.files += test.db
 deployment.path = /assets
@@ -39,7 +45,9 @@ SOURCES += main.cpp\
     tablelistworks.cpp \
     tablemadeworks.cpp \
     mainwindow.cpp \
-    settings.cpp
+    settings.cpp \
+    addspecialty.cpp \
+    addgroup.cpp
 
 HEADERS  += mainform.h \
     worktables.h \
@@ -61,7 +69,9 @@ HEADERS  += mainform.h \
     tablelistworks.h \
     tablemadeworks.h \
     mainwindow.h \
-    settings.h
+    settings.h \
+    addspecialty.h \
+    addgroup.h
 
 FORMS    += mainform.ui \
     worktables.ui \
@@ -82,7 +92,9 @@ FORMS    += mainform.ui \
     tablevisit.ui \
     tablelistworks.ui \
     tablemadeworks.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    addspecialty.ui \
+    addgroup.ui
 
 CONFIG += mobility
 MOBILITY = 
