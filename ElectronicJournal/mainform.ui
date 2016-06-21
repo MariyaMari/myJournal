@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>482</width>
-    <height>530</height>
+    <width>386</width>
+    <height>491</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -49,6 +49,13 @@
       <widget class="QPushButton" name="pushButton_3">
        <property name="text">
         <string>Импорт данных</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_4">
+       <property name="text">
+        <string>Экспорт данных</string>
        </property>
       </widget>
      </item>
