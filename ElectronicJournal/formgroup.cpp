@@ -39,7 +39,7 @@ void FormGroup::Init()
     ui->tableView->setItemDelegate(new QSqlRelationalDelegate(ui->tableView));
     ui->tableView->setColumnHidden(0, true);
     ui->tableView->show();
-    model->setHeaderData(1, Qt::Horizontal, "Название Групп");
+    model->setHeaderData(1, Qt::Horizontal, "Название\nГрупп");
     model->setHeaderData(2, Qt::Horizontal, "Год");
     model->setHeaderData(3, Qt::Horizontal, "Специальность");
 
@@ -52,6 +52,9 @@ void FormGroup::Init()
 void FormGroup::on_pushButton_clicked() //Удалить
 {
     model->removeRow(ui->tableView->currentIndex().row());
+    if(!model->submitAll())
+        QMessageBox::warning(this, "Error", model->lastError().text());
+    model->select();
 }
 
 void FormGroup::on_pushButton_2_clicked() //Добавить
@@ -62,13 +65,6 @@ void FormGroup::on_pushButton_2_clicked() //Добавить
     addGrup->Init(mod, db);
     //addGrup->show();
     emit newWindow(addGrup);
-}
-
-void FormGroup::on_pushButton_3_clicked() //Подтвердить
-{
-    if(!model->submitAll())
-        QMessageBox::warning(this, "Error", model->lastError().text());
-    model->select();
 }
 
 void FormGroup::closeAddSpec()

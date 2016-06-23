@@ -11,7 +11,7 @@ FormTypeWorks::FormTypeWorks(const SettingsPtr &settings, QWidget *parent) :
     ui->setupUi(this);
 
     model = new QSqlTableModel(0, db);
-    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setEditStrategy(QSqlTableModel::OnFieldChange);
     model->setTable("typerabot");
     model->select();
     Init();
@@ -43,17 +43,14 @@ void FormTypeWorks::Init()
 void FormTypeWorks::on_pushButton_clicked() //Удалить
 {
     model->removeRow(ui->tableView->currentIndex().row());
-}
-
-void FormTypeWorks::on_pushButton_2_clicked() //Добавить
-{
-    QSqlRecord newRec;
-    model->insertRecord(-1, newRec);
-}
-
-void FormTypeWorks::on_pushButton_3_clicked() //Подтвердить
-{
     if(!model->submitAll())
         QMessageBox::warning(this, "Error", model->lastError().text());
     model->select();
 }
+
+void FormTypeWorks::on_pushButton_2_clicked() //Добавить
+{
+    int row = model->rowCount();
+    model->insertRow(row);
+}
+

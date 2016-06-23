@@ -51,6 +51,9 @@ void FormSpecialty::Init()
 void FormSpecialty::on_pushButton_clicked() //Удалить
 {
     model->removeRow(ui->tableView->currentIndex().row());
+    if(!model->submitAll())
+        QMessageBox::warning(this, "Error", model->lastError().text());
+    model->select();
 }
 
 void FormSpecialty::on_pushButton_2_clicked() //Добавить
@@ -61,13 +64,6 @@ void FormSpecialty::on_pushButton_2_clicked() //Добавить
     addSpec->Init(mod, db);
     //addSpec->show();
     emit newWindow(addSpec);
-}
-
-void FormSpecialty::on_pushButton_3_clicked() //Подтвердить
-{
-    if(!model->submitAll())
-        QMessageBox::warning(this, "Error", model->lastError().text());
-    model->select();
 }
 
 void FormSpecialty::closeAddSpec()

@@ -11,7 +11,8 @@ FormFaculty::FormFaculty(const SettingsPtr &settings, QWidget *parent) :
     ui->setupUi(this);
 
     model = new QSqlTableModel(0, db);
-    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+//    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setEditStrategy(QSqlTableModel::OnFieldChange);
     model->setTable("facultet");
     model->select();
     Init();
@@ -43,18 +44,15 @@ void FormFaculty::Init()
 void FormFaculty::on_pushButton_clicked() //Удалить
 {
     model->removeRow(ui->tableView->currentIndex().row());
-}
-
-void FormFaculty::on_pushButton_2_clicked() //Добавить
-{
-    QSqlRecord newRec;
-    model->insertRecord(-1, newRec);
-}
-
-void FormFaculty::on_pushButton_3_clicked() //Подтвердить
-{
     if(!model->submitAll())
         QMessageBox::warning(this, "Error", model->lastError().text());
     model->select();
 }
+
+void FormFaculty::on_pushButton_2_clicked() //Добавить
+{
+    int row = model->rowCount();
+    model->insertRow(row);
+}
+
 

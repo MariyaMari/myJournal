@@ -11,7 +11,8 @@ FormDiscipline::FormDiscipline(const SettingsPtr &settings, QWidget *parent) :
     ui->setupUi(this);
 
     model = new QSqlTableModel(0, db);
-    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+//    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setEditStrategy(QSqlTableModel::OnFieldChange);
     model->setTable("disciplina");
     model->select();
     Init();
@@ -48,20 +49,30 @@ void FormDiscipline::Init()
 void FormDiscipline::on_pushButton_clicked() //Удалить
 {
     model->removeRow(ui->tableView->currentIndex().row());
-}
-
-void FormDiscipline::on_pushButton_2_clicked() //Добавить
-{
-    QSqlRecord newRec;
-    model->insertRecord(-1, newRec);
-}
-
-void FormDiscipline::on_pushButton_3_clicked() //Подтвердить
-{
     if(!model->submitAll())
         QMessageBox::warning(this, "Error", model->lastError().text());
     model->select();
 }
+
+void FormDiscipline::on_pushButton_2_clicked() //Добавить
+{
+//    QSqlRecord newRec;
+//    model->insertRecord(-1, newRec);
+
+    int row = model->rowCount();
+    model->insertRow(row);
+//    if(!model->insertRow(row))
+//    {
+//        QMessageBox::warning(this, "Error", model->lastError().text());
+//    }
+}
+
+//void FormDiscipline::on_pushButton_3_clicked() //Подтвердить
+//{
+//    if(!model->submitAll())
+//        QMessageBox::warning(this, "Error", model->lastError().text());
+//    model->select();
+//}
 
 void FormDiscipline::closeEvent(QCloseEvent *e)
 {
