@@ -41,6 +41,7 @@ void TableMadeWorks::Init()
 
     ui->tableView->show();
     model.setHeaderData(1, Qt::Horizontal, "ФИО Студента");
+//    model.setHeaderData(2, Qt::Horizontal, "Номер\nработы");
 
     QHeaderView *pHW = ui->tableView->horizontalHeader(); //Нормальный размер колонок
     int count = pHW->count();

@@ -15,6 +15,11 @@ TablePlan::TablePlan(const SettingsPtr &settings, QWidget *parent) :
     model.setRelation(1, QSqlRelation("disciplina", "id_dis", "n_dis"));
     update();
     Init();
+
+    addPlan = new AddPlan(settings);
+    connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(on_pushButton_2_clicked()));
+    connect(addPlan, SIGNAL(InsertQuery(QString)), this, SLOT(QueryInserted(QString)));
+    connect(addPlan, SIGNAL(closeThisWidget()), this, SLOT(closeAddPlan()));
 }
 
 TablePlan::~TablePlan()
@@ -40,6 +45,9 @@ void TablePlan::setFilter(const QString & n_spec, const QString & semes)
     }
     viewModel2.setFilterKeyColumn(0);
     viewModel2.setFilterFixedString(id_spec);
+
+    this->Semes = semes;
+    idSpec = id_spec;
 }
 
 void TablePlan::Init()
@@ -61,16 +69,30 @@ void TablePlan::Init()
 void TablePlan::on_pushButton_clicked() //Удалить
 {
     model.removeRow(ui->tableView->currentIndex().row());
+    if(!model.submitAll())
+        QMessageBox::warning(this, "Error", model.lastError().text());
+    model.select();
 }
 
 void TablePlan::on_pushButton_2_clicked() //Добавить
 {
+    QSqlQueryModel *mod = new QSqlQueryModel();
+    mod->setQuery("select n_dis from disciplina;");
 
+    addPlan->Init(mod, Semes, idSpec);
+
+    emit newWindow(addPlan);
 }
 
-void TablePlan::on_pushButton_3_clicked() //Подтвердить
+void TablePlan::closeAddPlan()
 {
-    if(!model.submitAll())
-        QMessageBox::warning(this, "Error", model.lastError().text());
-    update();
+    emit newWindow(this);
+}
+
+void TablePlan::QueryInserted(QString query)
+{
+    QSqlQuery q;
+    if(!q.exec(query))
+        QMessageBox::warning(this, "Error 1", q.lastError().text());
+    model.submitAll();
 }

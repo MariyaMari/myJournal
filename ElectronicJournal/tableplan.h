@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QtSql>
+#include "addplan.h"
 #include "settings.h"
 
 namespace Ui {
@@ -29,13 +30,19 @@ private slots:
 
     void on_pushButton_2_clicked();
 
-    void on_pushButton_3_clicked();
+    void QueryInserted(QString query);
+
+    void closeAddPlan();
 
 private:
     Ui::TablePlan *ui;
 
+    AddPlan *addPlan;
+    QString idSpec, Semes;
     SettingsPtr m_settings;
 
+signals:
+    void newWindow( QWidget * widget );
 };
 
 #endif // TABLEPLAN_H

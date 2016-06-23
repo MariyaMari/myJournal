@@ -30,7 +30,7 @@ void TableVisit::update()
     model.select();
 }
 
-void TableVisit::setFilter(const QString & n_trab, const QString & n_dis, const QString &data, const QString & n_gr)
+void TableVisit::setFilter(const QString &n_trab, const QString &n_dis, const QString &data, const QString &n_gr)
 {
     QSqlQuery query( "SELECT id_trab FROM typerabot WHERE n_trab='" + n_trab + "'" );
     QString id_trab;
@@ -53,6 +53,23 @@ void TableVisit::setFilter(const QString & n_trab, const QString & n_dis, const 
     viewModel3.setFilterKeyColumn(1);
     viewModel3.setFilterFixedString(data);
 
+//    QSqlQuery query2( "SELECT sostavgr.id_st FROM sostavgr, gruppa WHERE gruppa.id_gr = sostavgr.id_gr AND gruppa.n_gr='" + n_gr + "'" );
+//    QString regString = "(";
+//    while(query2.next())
+//    {
+//        regString += query2.value(0).toString() + "|";
+//    }
+//    regString = regString.left(regString.length() - 1);
+//    regString += ")";
+//    regString = "(\\d+)";
+//    QRegExp regExp(regString);
+
+//    viewModel4.setFilterKeyColumn(0);
+//    viewModel4.setFilterRegExp(regExp);
+
+//    qDebug()<<regString<<endl;
+
+
     this->data = data;
     idDis = id_dis;
     idTrab = id_trab;
@@ -64,7 +81,8 @@ void TableVisit::Init()
     viewModel1.setSourceModel(&model);
     viewModel2.setSourceModel(&viewModel1);
     viewModel3.setSourceModel(&viewModel2);
-    ui->tableView->setModel(&viewModel3);
+    viewModel4.setSourceModel(&viewModel3);
+    ui->tableView->setModel(&viewModel4);
     ui->tableView->setColumnHidden(1, true);
     ui->tableView->setColumnHidden(2, true);
     ui->tableView->setColumnHidden(4, true);

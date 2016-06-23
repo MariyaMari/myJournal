@@ -10,6 +10,7 @@ ToListWorks::ToListWorks(const SettingsPtr &settings, QWidget *parent) :
 
     listWorks = new TableListWorks(settings);
     connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
+    connect(listWorks, SIGNAL(newWindow(QWidget *)), this, SIGNAL(newWindow(QWidget *)));
 }
 
 ToListWorks::~ToListWorks()
@@ -40,6 +41,6 @@ void ToListWorks::on_pushButton_clicked()
     QString text3 = ui->comboBox->currentText();
 
     listWorks->setNGr(text, text1, text2, text3);
-    listWorks->Update();
+    listWorks->update();
     emit newWindow(listWorks);
 }

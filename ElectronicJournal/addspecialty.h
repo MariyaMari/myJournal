@@ -18,7 +18,6 @@ public:
     ~AddSpecialty();
 
     QSqlDatabase *db;
-    QSqlQueryModel *modFac;
 
     void Init(QSqlQueryModel *mod1, QSqlDatabase &db);
 

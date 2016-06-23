@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QtSql>
+#include "addlistworks.h"
 #include "settings.h"
 
 namespace Ui {
@@ -21,20 +22,27 @@ public:
     QSqlRelationalTableModel *model;
 
     void Init();
-    void Update();
-    void setNGr(const QString & text, const QString &text1, const QString &text2, const QString &text3);
+    void update();
+    void setNGr(const QString &text, const QString &text1, const QString &text2, const QString &text3);
 
 private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
 
-    void on_pushButton_3_clicked();
+    void QueryInserted(QString query);
+
+    void closeAddListWorks();
 
 private:
     Ui::TableListWorks *ui;
 
+    AddListWorks *addListWor;
+    QString Semes, Spec, Dis, Trab;
     SettingsPtr m_settings;
+
+signals:
+    void    newWindow( QWidget * widget );
 };
 
 #endif // TABLELISTWORKS_H

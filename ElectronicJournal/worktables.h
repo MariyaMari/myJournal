@@ -23,7 +23,6 @@ public:
     ~WorkTables();
 
     QSqlDatabase db;
-    QSqlTableModel *model;
 
 private slots:
     void on_pushButton_clicked();

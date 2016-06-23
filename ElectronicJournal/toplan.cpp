@@ -10,7 +10,7 @@ ToPlan::ToPlan(const SettingsPtr &settings, QWidget *parent) :
 
     plan = new TablePlan(settings);
     connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
-
+    connect(plan, SIGNAL(newWindow(QWidget *)), this, SIGNAL(newWindow(QWidget *)));
 }
 
 ToPlan::~ToPlan()

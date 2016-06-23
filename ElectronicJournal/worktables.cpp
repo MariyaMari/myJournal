@@ -73,7 +73,10 @@ void WorkTables::on_pushButton_3_clicked()
     QSqlQueryModel *mod3 = new QSqlQueryModel();
     mod3->setQuery("select n_trab from typerabot;");
 
-    toVisit->Init(mod1, mod2, mod3);
+    QSqlQueryModel *mod4 = new QSqlQueryModel();
+    mod4->setQuery("select n_gr from gruppa;");
+
+    toVisit->Init(mod1, mod2, mod3, mod4);
 
     emit newWindow(toVisit);
 }

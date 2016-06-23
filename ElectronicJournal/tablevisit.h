@@ -18,7 +18,7 @@ public:
     ~TableVisit();
 
     QSqlRelationalTableModel model;
-    QSortFilterProxyModel viewModel1, viewModel2, viewModel3;
+    QSortFilterProxyModel viewModel1, viewModel2, viewModel3, viewModel4;
 
     void Init();
     void update();
@@ -36,7 +36,7 @@ private slots:
 
 private:
     Ui::TableVisit *ui;
-    QString idSt,idTrab,idDis,numberPropusk,data;
+    QString idSt, idTrab, idDis, numberPropusk, data;
     SettingsPtr m_settings;
 };
 

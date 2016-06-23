@@ -17,11 +17,16 @@ public:
     explicit MainForm( const SettingsPtr & settings, QWidget * parent = 0 );
     ~MainForm();
 
-    void connectToDatabase();
+//    void connectToDatabase();
+//    void copydb();
 
     private slots:
     void    on_pushButton_clicked();
     void    on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
+    void on_pushButton_4_clicked();
 
 private:
     Ui::MainForm    m_ui;

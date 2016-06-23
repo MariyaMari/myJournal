@@ -40,11 +40,6 @@ void TableCompositionGroup::setFilter(const QString & semes, const QString & n_g
     }
     viewModel2.setFilterKeyColumn(1);
     viewModel2.setFilterFixedString(id_gr);
-
-//    model->setFilter("id_gr=(SELECT gruppa.id_gr FROM gruppa WHERE gruppa.n_gr='"
-//                    + text + "') "
-//                    "AND semes=" + text1 + ";");
-
 }
 
 void TableCompositionGroup::Init()

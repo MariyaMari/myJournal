@@ -20,9 +20,9 @@ public:
     ~ToVisit();
 
     QSqlDatabase db;
-    QSqlQueryModel *modData, *modDis, *modVidWor;
+    QSqlQueryModel *modData, *modDis, *modVidWor, *modGr;
 
-    void Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2, QSqlQueryModel *mod3);
+    void Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2, QSqlQueryModel *mod3, QSqlQueryModel *mod4);
 
 private slots:
     void on_pushButton_clicked();

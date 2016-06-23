@@ -16,7 +16,7 @@ TEMPLATE = app
 
 CONFIG += release c++11
 INCLUDEPATH += ../ImportExport
-LIBPATH     += ../ImportExport
+LIBPATH     += ../ElectronicJournal
 LIBS   += -L../../ImportExport
 LIBS   += -lImportExport
 
@@ -47,7 +47,9 @@ SOURCES += main.cpp\
     mainwindow.cpp \
     settings.cpp \
     addspecialty.cpp \
-    addgroup.cpp
+    addgroup.cpp \
+    addplan.cpp \
+    addlistworks.cpp
 
 HEADERS  += mainform.h \
     worktables.h \
@@ -71,7 +73,9 @@ HEADERS  += mainform.h \
     mainwindow.h \
     settings.h \
     addspecialty.h \
-    addgroup.h
+    addgroup.h \
+    addplan.h \
+    addlistworks.h
 
 FORMS    += mainform.ui \
     worktables.ui \
@@ -94,7 +98,9 @@ FORMS    += mainform.ui \
     tablemadeworks.ui \
     mainwindow.ui \
     addspecialty.ui \
-    addgroup.ui
+    addgroup.ui \
+    addplan.ui \
+    addlistworks.ui
 
 CONFIG += mobility
 MOBILITY = 

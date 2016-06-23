@@ -38,5 +38,6 @@ void AddSpecialty::on_pushButton_clicked()
     QString query = "insert into specialty (n_spec, id_fac) values ('" + ui->lineEdit->text() + "', " + pot + ");";
 
     emit InsertQuery(query);
+    ui->lineEdit->clear();
     emit closeThisWidget();
 }

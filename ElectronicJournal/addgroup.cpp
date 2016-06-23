@@ -39,6 +39,8 @@ void AddGroup::on_pushButton_clicked()
                                                                           + pot + ");";
 
     emit InsertQuery(query);
+    ui->lineEdit->clear();
+    ui->lineEdit_2->clear();
     emit closeThisWidget();
 }
 

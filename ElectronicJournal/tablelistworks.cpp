@@ -15,6 +15,11 @@ TableListWorks::TableListWorks(const SettingsPtr &settings, QWidget *parent) :
     model->setTable("link1");
     model->select();
     Init();
+
+    addListWor = new AddListWorks(settings);
+    connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(on_pushButton_2_clicked()));
+    connect(addListWor, SIGNAL(InsertQuery(QString)), this, SLOT(QueryInserted(QString)));
+    connect(addListWor, SIGNAL(closeThisWidget()), this, SLOT(closeAddListWorks()));
 }
 
 TableListWorks::~TableListWorks()
@@ -22,7 +27,7 @@ TableListWorks::~TableListWorks()
     delete ui;
 }
 
-void TableListWorks::Update()
+void TableListWorks::update()
 {
     model->select();
 }
@@ -38,6 +43,10 @@ void TableListWorks::setNGr(const QString & text, const QString & text1, const Q
                    + "AND semes=" + text3
                    + ";");
 
+    this->Semes = text3;
+    Spec = text2;
+    Dis = text1;
+    Trab = text;
 }
 
 void TableListWorks::Init()
@@ -51,7 +60,7 @@ void TableListWorks::Init()
     ui->tableView->show();
     model->setHeaderData(1, Qt::Horizontal, "Название");
     model->setHeaderData(2, Qt::Horizontal, "№");
-    model->setHeaderData(6, Qt::Horizontal, "Продолжительность");
+    model->setHeaderData(6, Qt::Horizontal, "Срок");
     model->setHeaderData(7, Qt::Horizontal, "Ранг");
 
     QHeaderView *pHW = ui->tableView->horizontalHeader(); //Нормальный размер колонок
@@ -63,16 +72,27 @@ void TableListWorks::Init()
 void TableListWorks::on_pushButton_clicked() //Удалить
 {
     model->removeRow(ui->tableView->currentIndex().row());
+    if(!model->submitAll())
+        QMessageBox::warning(this, "Error", model->lastError().text());
+    model->select();
 }
 
 void TableListWorks::on_pushButton_2_clicked() //Добавить
 {
+    addListWor->Init(Semes, Spec, Dis, Trab, db);
 
+    emit newWindow(addListWor);
 }
 
-void TableListWorks::on_pushButton_3_clicked() //Подтвердить
+void TableListWorks::closeAddListWorks()
 {
-    if(!model->submitAll())
-        QMessageBox::warning(this, "Error", model->lastError().text());
-    model->select();
+    emit newWindow(this);
+}
+
+void TableListWorks::QueryInserted(QString query)
+{
+    QSqlQuery q;
+    if(!q.exec(query))
+        QMessageBox::warning(this, "Error 1", q.lastError().text());
+    model->submitAll();
 }
