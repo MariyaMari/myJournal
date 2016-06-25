@@ -5,7 +5,8 @@
 
 AddListWorks::AddListWorks(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::AddListWorks)
+    ui(new Ui::AddListWorks),
+    m_settings(settings)
 {
     ui->setupUi(this);
 }

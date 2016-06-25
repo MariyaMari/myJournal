@@ -39,7 +39,7 @@ WorkTables::~WorkTables()
 void WorkTables::on_pushButton_clicked()
 {
     QSqlQueryModel *mod1 = new QSqlQueryModel();
-    mod1->setQuery("select semes from plan GROUP BY semes;");
+//    mod1->setQuery("select semes from plan GROUP BY semes;");
 
     QSqlQueryModel *mod2 = new QSqlQueryModel();
     mod2->setQuery("select n_spec from specialty;");
@@ -52,7 +52,7 @@ void WorkTables::on_pushButton_clicked()
 void WorkTables::on_pushButton_2_clicked()
 {
     QSqlQueryModel *mod1 = new QSqlQueryModel();
-    mod1->setQuery("select semes from sostavgr GROUP BY semes;");
+//    mod1->setQuery("select semes from sostavgr GROUP BY semes;");
 
     QSqlQueryModel *mod2 = new QSqlQueryModel();
     mod2->setQuery("select n_gr from gruppa;");
@@ -84,7 +84,7 @@ void WorkTables::on_pushButton_3_clicked()
 void WorkTables::on_pushButton_4_clicked()
 {
     QSqlQueryModel *mod1 = new QSqlQueryModel();
-    mod1->setQuery("select semes from link1 GROUP BY semes;");
+//    mod1->setQuery("select semes from link1 GROUP BY semes;");
 
     QSqlQueryModel *mod2 = new QSqlQueryModel();
     mod2->setQuery("select n_spec from specialty;");

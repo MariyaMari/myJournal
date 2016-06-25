@@ -5,7 +5,8 @@
 
 AddGroup::AddGroup(const SettingsPtr &settings, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::AddGroup)
+    ui(new Ui::AddGroup),
+    m_settings(settings)
 {
     ui->setupUi(this);
 }

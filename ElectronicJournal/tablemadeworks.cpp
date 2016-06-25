@@ -30,6 +30,14 @@ void TableMadeWorks::setFilter(const QString & n_gr, const QString & n_dis, cons
     viewModel1.setFilterKeyColumn(0);
     viewModel1.setFilterFixedString(data);
 
+    model.setFilter("link2.id_st=(SELECT sostavgr.id_st FROM sostavgr, gruppa WHERE gruppa.id_gr = sostavgr.id_gr AND gruppa.n_gr='" + n_gr + "')");
+    model.select();
+
+
+    ui->label_3->setText(data);
+    ui->label_5->setText(n_gr);
+    ui->label_7->setText(n_dis);
+    ui->label_9->setText(n_trab);
 }
 
 void TableMadeWorks::Init()

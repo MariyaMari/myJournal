@@ -12,9 +12,11 @@ TableVisit::TableVisit(const SettingsPtr &settings, QWidget *parent) :
     ui->setupUi(this);
 
     numberPropusk = "0";
+    ui->label_11->setText(numberPropusk);
 
     model.setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
     model.setTable("link3");
+    //model.setFilter("fio = (SELECT students.fio FROM students, sostavgr, gruppa WHERE students.id_st = sostavgr.id_st AND gruppa.id_gr = sostavgr.id_gr AND gruppa.n_gr='ПО-11')");
     model.setRelation(0, QSqlRelation("students", "id_st", "fio"));
     update();
     Init();
@@ -32,6 +34,9 @@ void TableVisit::update()
 
 void TableVisit::setFilter(const QString &n_trab, const QString &n_dis, const QString &data, const QString &n_gr)
 {
+    model.setFilter("link3.id_st=(SELECT sostavgr.id_st FROM sostavgr, gruppa WHERE gruppa.id_gr = sostavgr.id_gr AND gruppa.n_gr='" + n_gr + "')");
+    model.select();
+
     QSqlQuery query( "SELECT id_trab FROM typerabot WHERE n_trab='" + n_trab + "'" );
     QString id_trab;
     while(query.next())
@@ -61,11 +66,11 @@ void TableVisit::setFilter(const QString &n_trab, const QString &n_dis, const QS
 //    }
 //    regString = regString.left(regString.length() - 1);
 //    regString += ")";
-//    regString = "(\\d+)";
-//    QRegExp regExp(regString);
+    QString regString = "";
+    QRegExp regExp(regString);
 
-//    viewModel4.setFilterKeyColumn(0);
-//    viewModel4.setFilterRegExp(regExp);
+    viewModel4.setFilterKeyColumn(0);
+    viewModel4.setFilterRegExp(regExp);
 
 //    qDebug()<<regString<<endl;
 
@@ -74,6 +79,10 @@ void TableVisit::setFilter(const QString &n_trab, const QString &n_dis, const QS
     idDis = id_dis;
     idTrab = id_trab;
 
+    ui->label_3->setText(data);
+    ui->label_5->setText(n_gr);
+    ui->label_7->setText(n_dis);
+    ui->label_9->setText(n_trab);
 }
 
 void TableVisit::Init()
@@ -100,16 +109,19 @@ void TableVisit::Init()
 void TableVisit::on_pushButton_2_clicked()
 {
     numberPropusk = "0";
+    ui->label_11->setText(numberPropusk);
 }
 
 void TableVisit::on_pushButton_clicked()
 {
     numberPropusk = "1";
+    ui->label_11->setText(numberPropusk);
 }
 
 void TableVisit::on_pushButton_4_clicked()
 {
     numberPropusk = "2";
+    ui->label_11->setText(numberPropusk);
 }
 
 void TableVisit::on_tableView_clicked(const QModelIndex &index)

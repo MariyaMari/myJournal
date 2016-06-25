@@ -21,7 +21,11 @@ ToListWorks::~ToListWorks()
 void ToListWorks::Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2, QSqlQueryModel *mod3, QSqlQueryModel *mod4)
 {
     this->modSemes = mod1;
-    ui->comboBox->setModel(mod1);
+//    ui->comboBox->setModel(mod1);
+    for(int i = 1; i < 13; i ++)
+    {
+        ui->comboBox->itemText(i);
+    }
 
     this->modSpec = mod2;
     ui->comboBox_2->setModel(mod2);

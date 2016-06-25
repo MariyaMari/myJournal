@@ -10,6 +10,7 @@ ToCompositionGroup::ToCompositionGroup(const SettingsPtr &settings, QWidget *par
 
     compGrup = new TableCompositionGroup(settings);
     connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
+    connect(compGrup, SIGNAL(newWindow(QWidget *)), this, SIGNAL(newWindow(QWidget *)));
 }
 
 ToCompositionGroup::~ToCompositionGroup()
@@ -20,7 +21,11 @@ ToCompositionGroup::~ToCompositionGroup()
 void ToCompositionGroup::Init(QSqlQueryModel *mod1, QSqlQueryModel *mod2)
 {
     this->modSemes = mod1;
-    ui->comboBox->setModel(mod1);
+//    ui->comboBox->setModel(mod1);
+    for(int i = 1; i < 13; i ++)
+    {
+        ui->comboBox->itemText(i);
+    }
 
     this->modGrup = mod2;
     ui->comboBox_2->setModel(mod2);

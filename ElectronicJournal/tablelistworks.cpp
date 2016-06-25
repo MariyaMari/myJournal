@@ -47,6 +47,11 @@ void TableListWorks::setNGr(const QString & text, const QString & text1, const Q
     Spec = text2;
     Dis = text1;
     Trab = text;
+
+    ui->label_3->setText(text3);
+    ui->label_5->setText(text1);
+    ui->label_7->setText(text2);
+    ui->label_9->setText(text);
 }
 
 void TableListWorks::Init()

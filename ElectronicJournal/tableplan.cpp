@@ -48,6 +48,9 @@ void TablePlan::setFilter(const QString & n_spec, const QString & semes)
 
     this->Semes = semes;
     idSpec = id_spec;
+
+    ui->label_3->setText(n_spec);
+    ui->label_5->setText(semes);
 }
 
 void TablePlan::Init()
@@ -68,7 +71,20 @@ void TablePlan::Init()
 
 void TablePlan::on_pushButton_clicked() //Удалить
 {
-    model.removeRow(ui->tableView->currentIndex().row());
+    model.removeRow(ui->tableView->selectionModel()->currentIndex().row());
+    //qDebug() << ui->tableView->currentIndex().row() << model.lastError().driverText();
+    /*QList<int> delList;
+        foreach(QModelIndex ind, ui->tableView->selectionModel()->selectedRows()) {
+     delList.append(ind.row());
+    }
+
+        int k=0;
+        foreach(int ind, delList) {
+            model.removeRow(ind-k);
+            model.select();
+            k++;
+        }
+        model.removeRow(0);*/
     if(!model.submitAll())
         QMessageBox::warning(this, "Error", model.lastError().text());
     model.select();

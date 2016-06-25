@@ -32,7 +32,7 @@
     <widget class="QPushButton" name="backButton">
      <property name="font">
       <font>
-       <pointsize>35</pointsize>
+       <pointsize>30</pointsize>
       </font>
      </property>
      <property name="text">
@@ -44,7 +44,7 @@
     <widget class="QPushButton" name="nextButton">
      <property name="font">
       <font>
-       <pointsize>35</pointsize>
+       <pointsize>30</pointsize>
       </font>
      </property>
      <property name="text">
