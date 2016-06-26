@@ -77,7 +77,12 @@ QVariant    MadeWorkModel::headerData( int section, Qt::Orientation orientation,
     int workNumber = section - studentsModel.columnCount();
     if( workNumber >= 0 )
     {
-        return QString( "%1" ).arg( workNumber + 1 );
+        if( role == Qt::ItemDataRole::TextAlignmentRole )
+        {
+            return Qt::AlignCenter;
+        }
+ 
+       return            QString( "%1" ).arg( workNumber + 1 );
     }
     return studentsModel.headerData( section, orientation, role );
 }
