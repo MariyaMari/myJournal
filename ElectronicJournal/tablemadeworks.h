@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QtSql>
 #include "settings.h"
+#include "madeworkmodel.hpp"
 
 namespace Ui {
 class TableMadeWorks;
@@ -17,7 +18,7 @@ public:
     explicit TableMadeWorks(const SettingsPtr & settings, QWidget *parent = 0);
     ~TableMadeWorks();
 
-    QSqlRelationalTableModel model;
+    MadeWorkModel model;
     QSortFilterProxyModel viewModel1, viewModel2, viewModel3, viewModel4;
 
     void Init();

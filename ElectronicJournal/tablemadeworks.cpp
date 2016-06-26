@@ -8,9 +8,10 @@ TableMadeWorks::TableMadeWorks(const SettingsPtr &settings, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    model.setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
-    model.setTable("link2");
-    model.setRelation(1, QSqlRelation("students", "id_st", "fio"));
+    //model.setEditStrategy(QSqlRelationalTableModel::OnManualSubmit);
+    //model.setTable("link2");
+    //model.setRelation(1, QSqlRelation("students", "id_st", "fio"));
+
     update();
     Init();
 }
@@ -30,9 +31,8 @@ void TableMadeWorks::setFilter(const QString & n_gr, const QString & n_dis, cons
     viewModel1.setFilterKeyColumn(0);
     viewModel1.setFilterFixedString(data);
 
-    model.setFilter("link2.id_st=(SELECT sostavgr.id_st FROM sostavgr, gruppa WHERE gruppa.id_gr = sostavgr.id_gr AND gruppa.n_gr='" + n_gr + "')");
+    model.setGroupName( n_gr );
     model.select();
-
 
     ui->label_3->setText(data);
     ui->label_5->setText(n_gr);
@@ -44,11 +44,15 @@ void TableMadeWorks::Init()
 {
     viewModel1.setSourceModel(&model);
     viewModel2.setSourceModel(&viewModel1);
-    ui->tableView->setModel(&viewModel2);
+    ui->tableView->setModel(&model ); //FIX
 //    ui->tableView->setColumnHidden(0, true);
 
     ui->tableView->show();
-    model.setHeaderData(1, Qt::Horizontal, "ФИО Студента");
+   // ui->tableView->hideColumn( 0 );
+ //   ui->tableView->hideColumn( 1 );
+ //   ui->tableView->hideColumn( 2 );
+ //   ui->tableView->hideColumn( 3 );
+ //   model.setHeaderData( 4, Qt::Horizontal, "ФИО Студента" );
 //    model.setHeaderData(2, Qt::Horizontal, "Номер\nработы");
 
     QHeaderView *pHW = ui->tableView->horizontalHeader(); //Нормальный размер колонок
