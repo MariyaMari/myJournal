@@ -23,6 +23,7 @@ public slots:
 
 private:
     QString                             m_groupName;
+    QSqlQueryModel                      studentsModel;
     QSqlQueryModel                      link2Model;
     QMap< int, QMap< int, bool > >      studentWorksModels;
 

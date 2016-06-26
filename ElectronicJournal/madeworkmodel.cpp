@@ -19,6 +19,8 @@ void    MadeWorkModel::select()
 
     link2Model.setQuery( "SELECT * FROM link2, students WHERE students.id_st = link2.id_st GROUP BY link2.id_st" );
 
+    studentsModel.setQuery( "SELECT students.fio FROM students, sostavgr, gruppa WHERE students.id_st = sostavgr.id_st AND gruppa.id_gr = sostavgr.id_gr" );
+
     QVector< int > ids;
     for( int i = 0; i < link2Model.rowCount(); ++i )
     {
@@ -51,33 +53,38 @@ void    MadeWorkModel::select()
 
 int    MadeWorkModel::rowCount( const QModelIndex & parent ) const
 {
-    return link2Model.rowCount( parent );
+    return studentsModel.rowCount( parent );
 }
 
 int    MadeWorkModel::columnCount( const QModelIndex & parent ) const
 {
-    return link2Model.columnCount( parent ) + 8;
+    return studentsModel.columnCount( parent ) + 8;
 }
 
 QVariant    MadeWorkModel::data( const QModelIndex & idx, int role ) const
 {
-    if ( idx.column() > link2Model.columnCount() - 1 )
+    int workNumber = idx.column() - studentsModel.columnCount();
+    if ( workNumber >= 0 )
     {
         int id = link2Model.data( link2Model.index( idx.row(), 1 ) ).toInt();
-        int workNumber = idx.column() - link2Model.columnCount();
         return studentWorksModels[ id ].contains( workNumber );
     }
-    return link2Model.data( idx, role );
+    return studentsModel.data( idx, role );
 }
 
 QVariant    MadeWorkModel::headerData( int section, Qt::Orientation orientation, int role ) const
 {
-    return link2Model.headerData( section, orientation, role );
+    int workNumber = section - studentsModel.columnCount();
+    if( workNumber >= 0 )
+    {
+        return QString( "%1" ).arg( workNumber + 1 );
+    }
+    return studentsModel.headerData( section, orientation, role );
 }
 
 bool    MadeWorkModel::setHeaderData( int section, Qt::Orientation orientation, const QVariant & value, int role )
 {
-    return link2Model.setHeaderData( section, orientation, value, role );
+    return studentsModel.setHeaderData( section, orientation, value, role );
 }
 
 void    MadeWorkModel::setGroupName( const QString & name )
