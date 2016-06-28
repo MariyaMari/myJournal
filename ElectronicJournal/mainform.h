@@ -28,9 +28,11 @@ public:
 
     void on_pushButton_4_clicked();
 
+    void copyDBFunc(QSqlDatabase src, QSqlDatabase dest);
+
 private:
     Ui::MainForm    m_ui;
-    QSqlDatabase    m_db;
+    QSqlDatabase    m_db, copydb;
     Spravochniki    m_spisokSpravochniki;
     WorkTables      m_spisokWorkTables;
     SettingsPtr     m_settings;

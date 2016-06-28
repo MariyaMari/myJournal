@@ -51,8 +51,24 @@ void MainForm::on_pushButton_2_clicked()
 
 void MainForm::on_pushButton_3_clicked() //Импорт
 {
-    QSqlDatabase copydb;
-    QString idUser;
+    QFile dfile( "assets:/copydb.db" );
+    if( dfile.exists() )
+    {
+        dfile.copy( "./copydb.db" );
+        QFile::setPermissions( "./copydb.db", QFile::WriteOwner | QFile::ReadOwner );
+    }
+
+    copydb = QSqlDatabase::addDatabase( "QSQLITE", "copy" );
+    copydb.setDatabaseName( "copydb.db" );
+    if( !copydb.open() )
+    {
+        QMessageBox::warning( this, tr( "Failed to connect!" ), tr( "Error connecting to database: " )
+                              + copydb.lastError().driverText() );
+    }
+    QSqlQuery query( copydb );
+    query.exec( "pragma foreign_keys = 1;" );
+
+    copyDBFunc(m_db, copydb);
 
 //    if(importdata(idUser, copydb))
 //    {
@@ -77,20 +93,124 @@ void MainForm::on_pushButton_4_clicked() //Экспорт
         QMessageBox::warning(this, "Error", "Не удалось экспортировать");
 }
 
+void MainForm::copyDBFunc(QSqlDatabase src, QSqlDatabase dest)
+{
+    QSqlQuery query(dest);
 
+    query.exec("drop table Link3");
+    query.exec("drop table Link2");
+    query.exec("drop table Link1");
+    query.exec("drop table Sostavgr");
+    query.exec("drop table Plan");
+    query.exec("drop table Gruppa");
+    //query.exec("drop table Typerabot");
+    query.exec("drop table Students");
+    query.exec("drop table Specialty");
+    query.exec("drop table Disciplina");
+    query.exec("drop table Facultet");
 
+    query.exec("create table disciplina(id_dis integer primary key, n_dis varchar(100) unique);"
 
-//void MainForm::copydb()
-//{
-//    QSqlQuery q(db);
+               "create table facultet(id_fac integer primary key, n_fac varchar(100) unique);"
 
-//    q.exec("create table disciplina(id_dis integer primary key, n_dis varchar(100) unique);");
-//    q.exec("create table facultet(id_fac integer primary key, n_fac varchar(100) unique);");
-//    q.exec("create table specialty(id_spec integer primary key, n_spec varchar(100) unique, id_fac integer references facultet(id_fac) on update cascade on delete cascade);");
-//    q.exec("create table students(id_st integer primary key, fio varchar(100) unique);");
-//    q.exec("create table gruppa(id_gr integer primary key, n_gr varchar(100) unique, _year integer, id_spec integer references specialty(id_spec) on update cascade on delete cascade);");
-//    q.exec("create table plan(id_spec integer references specialty(id_spec) on update cascade on delete cascade, id_dis integer references disciplina(id_dis) on update cascade on delete cascade, semes integer, primary key(id_spec, id_dis, semes));");
-//    q.exec("create table sostavgr(semes integer, id_gr integer references gruppa(id_gr) on update cascade on delete cascade, id_st integer references students(id_st) on update cascade on delete cascade, primary key(semes, id_gr, id_st));");
+               "create table specialty(id_spec integer primary key, n_spec varchar(100) unique, id_fac integer references facultet(id_fac) on update cascade on delete cascade);"
 
-//    q.exec("INSERT INTO disciplina SELECT id_dis, n_dis FROM disciplina;");
-//}
+               "create table students(id_st integer primary key, fio varchar(100) unique);"
+
+               "create table gruppa(id_gr integer primary key, n_gr varchar(100) unique, _year integer, id_spec integer references specialty(id_spec) on update cascade on delete cascade);"
+
+               "create table plan(id_spec integer references specialty(id_spec) on update cascade on delete cascade, id_dis integer references disciplina(id_dis) on update cascade on delete cascade, semes integer, primary key(id_spec, id_dis, semes));"
+
+               "create table sostavgr(semes integer, id_gr integer references gruppa(id_gr) on update cascade on delete cascade, id_st integer references students(id_st) on update cascade on delete cascade, primary key(semes, id_gr, id_st));");
+
+    QSqlQuery srcQuery(src);
+
+    srcQuery.exec("select * from disciplina");
+
+    while (srcQuery.next())
+    {
+        query.prepare("insert into disciplina values (?, ?)");
+
+        query.addBindValue(srcQuery.value(0));
+        query.addBindValue(srcQuery.value(1));
+
+        query.exec();
+    }
+
+    srcQuery.exec("select * from facultet");
+
+    while (srcQuery.next())
+    {
+        query.prepare("insert into facultet values (?, ?)");
+
+        query.addBindValue(srcQuery.value(0));
+        query.addBindValue(srcQuery.value(1));
+
+        query.exec();
+    }
+
+    srcQuery.exec("select * from specialty");
+
+    while (srcQuery.next())
+    {
+        query.prepare("insert into specialty values (?, ?, ?)");
+
+        query.addBindValue(srcQuery.value(0));
+        query.addBindValue(srcQuery.value(1));
+        query.addBindValue(srcQuery.value(2));
+
+        query.exec();
+    }
+
+    srcQuery.exec("select * from students");
+
+    while (srcQuery.next())
+    {
+        query.prepare("insert into students values (?, ?)");
+
+        query.addBindValue(srcQuery.value(0));
+        query.addBindValue(srcQuery.value(1));
+
+        query.exec();
+    }
+
+    srcQuery.exec("select * from gruppa");
+
+    while (srcQuery.next())
+    {
+        query.prepare("insert into gruppa values (?, ?, ?, ?)");
+
+        query.addBindValue(srcQuery.value(0));
+        query.addBindValue(srcQuery.value(1));
+        query.addBindValue(srcQuery.value(2));
+        query.addBindValue(srcQuery.value(3));
+
+        query.exec();
+    }
+
+    srcQuery.exec("select * from plan");
+
+    while (srcQuery.next())
+    {
+        query.prepare("insert into plan values (?, ?, ?)");
+
+        query.addBindValue(srcQuery.value(0));
+        query.addBindValue(srcQuery.value(1));
+        query.addBindValue(srcQuery.value(2));
+
+        query.exec();
+    }
+
+    srcQuery.exec("select * from sostavgr");
+
+    while (srcQuery.next())
+    {
+        query.prepare("insert into sostavgr values (?, ?, ?)");
+
+        query.addBindValue(srcQuery.value(0));
+        query.addBindValue(srcQuery.value(1));
+        query.addBindValue(srcQuery.value(2));
+
+        query.exec();
+    }
+}
